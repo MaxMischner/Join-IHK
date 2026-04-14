@@ -185,17 +185,15 @@ function renderInitials(activeUser) {
  * @returns {Promise<void>} - A promise that resolves after all tasks are fetched and processed.
  */
 async function getTasks() {
-    let response = await fetch(BASE_URL_TASK + ".json");
-    let responseJson = await response.json();    
-    let keys = Object.keys(responseJson);   
-    renderDeadline();
-    for (let index = 0; index < keys.length; index++) {
-        let key = keys[index];
-        let task = responseJson[key];
+    const { data, error } = await db.from('tasks').select('*');
+    if (error) { console.error('Error fetching tasks:', error); return; }
+    const tasks = data || [];
+    renderDeadline(tasks);
+    tasks.forEach(task => {
         renderTodoDone(task);
         renderUrgent(task);
-        renderSummary(task, keys);
-    }     
+        renderSummary(task, tasks);
+    });
 }
 
 /**
@@ -241,20 +239,17 @@ async function renderUrgent(task) {
  * with the ID `deadline`.
  * 
  */
-async function renderDeadline() {
-    let response = await fetch(BASE_URL_TASK + ".json");
-    let responseJson = await response.json();  
-    let tasksArray = Object.values(responseJson);
+function renderDeadline(tasksArray) {
     for (let i = 0; i < tasksArray.length; i++) {
         let task = tasksArray[i];
         if (task.duedate && task.duedate !== 'null') {
             if (upcomingDeadline === null || new Date(task.duedate) < new Date(upcomingDeadline)) {
-                upcomingDeadline = task.duedate;  
+                upcomingDeadline = task.duedate;
             }
         }
     }
-    deadline = moment(upcomingDeadline).format('ll');
-    document.getElementById('deadline').innerHTML = deadline; 
+    let deadline = moment(upcomingDeadline).format('ll');
+    document.getElementById('deadline').innerHTML = deadline;
 }
 
 /**
@@ -267,8 +262,8 @@ async function renderDeadline() {
  * 
  * @param {object} task - A single task object fetched from the database.
  */
-async function renderSummary(task, keys) {
-    document.getElementById('tasksTotal').innerHTML = keys.length;
+async function renderSummary(task, allTasks) {
+    document.getElementById('tasksTotal').innerHTML = allTasks.length;
     if (task.status === "in Progress") {
         inProgress.push(task)
         document.getElementById('tasksInProgress').innerHTML = inProgress.length; 

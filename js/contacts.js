@@ -27,22 +27,16 @@ function initUI() {
 }
 
 
-/** Query all contact form DB */
+/** Query all contacts from DB */
 function initContact() {
     contactListDIV.innerHTML = "";
     queryedContacts = [];
     allContacts = [];
     initUI();
     queryContacts().then(() => {
-        for (let index = 0; index < queryedContacts.length; index++) {
-            let contact = queryedContacts[index];
-            let keys = Object.keys(contact);
-            let contactDetail = contact[keys[0]];
-            contactDetail['id'] = keys[0];
-            allContacts.push(contactDetail);
-        }
+        allContacts = [...queryedContacts];
         reconstructContactArray();
-    })
+    });
 }   
 
 
@@ -96,17 +90,9 @@ function moveToEditedLi() {
 
 /** Fetch contacts from DB */
 async function queryContacts() {
-    let response = await fetch(BASE_URL_CONTACT + ".json");
-    let responseJSON = await response.json();
-    if (responseJSON) {
-        let keys = Object.keys(responseJSON);
-        
-        for (let index = 0; index < keys.length; index++) {    
-            const key = keys[index];
-            const value = responseJSON[key];
-            if (responseJSON[key]) queryedContacts.push({[key]: value});
-        }       
-    }
+    const { data, error } = await db.from('contacts').select('*');
+    if (error) { console.error('Error fetching contacts:', error); return; }
+    if (data) queryedContacts = [...data];
 }
 
 
@@ -202,18 +188,15 @@ async function deleteContact(e){
     deleteInProgress = true;
     const deleteBtn = document.querySelector(".contact-detail-delete");
     deleteBtn.disabled = true;
-    await fetch(BASE_URL_CONTACT + currentID + '.json',  {
-        method: "DELETE",
-    }).then ((response) => {
-        deleteBtn.disabled = false;
-        deleteInProgress = false;
-        if (response.ok) {
-            document.body.appendChild(getNotification("Contact successfully deleted"));
-            setTimeout(() => {
-                afterDelete();
-            }, 1000);
-        }
-    });
+    const { error } = await db.from('contacts').delete().eq('id', currentID);
+    deleteBtn.disabled = false;
+    deleteInProgress = false;
+    if (!error) {
+        document.body.appendChild(getNotification("Contact successfully deleted"));
+        setTimeout(() => {
+            afterDelete();
+        }, 1000);
+    }
 }
 
 
@@ -250,28 +233,29 @@ async function saveEditContact(e) {
 
 
 /**
- * Add contact into DB
+ * Add or update contact in DB
  * @param {String} id id is only to be passed by updating contact.
- * @param {object} data {email:"xin33@gmail.com", name:"Yang Xin", phone:"1234567", color:""}
+ * @param {object} data {email, name, phone, color}
  */
 async function putContact(data, id="", e) {
     let btn = e.target.querySelector(".edit-contact-bottom-save");
     btn.disabled = true;
-    await fetch(BASE_URL_CONTACT + id + ".json", {
-        method: id ? "PUT" : "POST" ,
-        headers: {"Content-Type": "application/json"},
-        body:JSON.stringify(data)
-    })
-    .then ((response) => {
-        if (!response) throw new Error("Network Error");
-        contactOverlay.classList.add("d-none");
-        return response.json();
-    })
-    .then (result => {
-        btn.disabled = false;
-        currentID = id || result.name;
-        updatePageInfo();
-    });
+
+    let resultId;
+    if (id) {
+        const { error } = await db.from('contacts').update(data).eq('id', id);
+        if (error) { console.error(error); btn.disabled = false; return; }
+        resultId = id;
+    } else {
+        const { data: inserted, error } = await db.from('contacts').insert(data).select().single();
+        if (error) { console.error(error); btn.disabled = false; return; }
+        resultId = inserted.id;
+    }
+
+    btn.disabled = false;
+    contactOverlay.classList.add("d-none");
+    currentID = resultId;
+    updatePageInfo();
 }
 
 

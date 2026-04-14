@@ -10,13 +10,12 @@ let signupBtn = document.getElementById("signupBtn");
 /** Clear error message */
 function clearErrorMsg () {
     signupBtn.innerText = "Sign Up";
-
     errorMSG.style.display = "none";
     errorMSG.innerText = "";
 }
 
 
-/** Clear all files */
+/** Clear all fields */
 function clearField () {
     errorMSG.style.display = "none";
     signupName.value = "";
@@ -27,9 +26,8 @@ function clearField () {
 }
 
 
-/** User clicks the Singup Button */
+/** User clicks the Signup Button */
 async function signup() {
-    
     let obj = checkField();
     if (!obj["b"]) {
         errorMSG.style.display = "block";
@@ -39,7 +37,7 @@ async function signup() {
             password.value = "";
             passwordAgain.value = "";
         }
-        return ;
+        return;
     }
     checkEmail();
 }
@@ -53,7 +51,7 @@ function validateEmail() {
     }
 
     let patt = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        
+
     if(!patt.test(signupEmail.value.trim())) {
         errorMSG.innerText = "Please fill up a valid email address.";
         return false;
@@ -68,7 +66,7 @@ function validateUsername() {
         errorMSG.innerText = "Username cannot be empty";
         return false;
     }
-        
+
     if(signupName.value.trim().length < 3) {
         errorMSG.innerText = "Username requires at least 3 letters.";
         return false;
@@ -83,7 +81,7 @@ function validatePassword() {
         errorMSG.innerText = "Password cannot be empty";
         return false;
     }
-        
+
     if(password.value.trim().length < 6) {
         errorMSG.innerText = "Password requires at least 6 letters";
         return false;
@@ -98,7 +96,7 @@ function validatePasswordAgain() {
         errorMSG.innerText = "Password cannot be empty";
         return false;
     }
-        
+
     if(passwordAgain.value.trim().length < 6) {
         errorMSG.innerText = "Password requires at least 6 characters";
         return false;
@@ -108,33 +106,17 @@ function validatePasswordAgain() {
 }
 
 
-/**
- * Reconstruct user array
- * @param {array} allUsers 
- * @returns array
- */
-function reconstructAllUsers(allUsers) {
-    let allUserArr = [];
-    for (let index = 0; index < allUsers.length; index++) {
-        let oneUser = allUsers[index]; 
-        let allEntries = Object.keys(oneUser);
-        allUserArr.push(oneUser[allEntries[0]]);
-    }
-    return allUserArr;
-}
-
-/** Validate if the mail is already in DB  */
+/** Validate if the mail is already in DB */
 async function checkEmail() {
     if (!validateUsername() || !validateEmail() || !validatePassword() || !validatePasswordAgain()) {
         errorMSG.style.display = "block";
         return false;
-    } 
+    }
     signupBtn.disabled = true;
     signupBtn.innerText = "Signing Up";
-    let allUsers = await getAllUsers();
-    allUsers = reconstructAllUsers(allUsers);
-    let user = allUsers.find(u => u.email == signupEmail.value.trim());
-    if(user) {
+    const { data: existingUsers, error } = await db.from('users').select('id').eq('email', signupEmail.value.trim());
+    if (error) { console.error(error); signupBtn.disabled = false; return; }
+    if (existingUsers && existingUsers.length > 0) {
         signupBtn.disabled = false;
         errorMSG.style.display = "block";
         errorMSG.innerText = "The email is already used.";
@@ -146,32 +128,21 @@ async function checkEmail() {
 
 /** Save User into DB */
 async function signupUser() {
-   
-    
-    let data = {email:signupEmail.value, name:signupName.value, password:signupPassword.value}
-    await fetch(BASE_URL_USER + ".json", {
-        method: "POST" ,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body:JSON.stringify(data)
-    }).then ((response) => {
-        if (response.ok) {
-            showNotification();
-        }
-    })
-
+    let data = { email: signupEmail.value, name: signupName.value, password: signupPassword.value };
+    const { error } = await db.from('users').insert(data);
+    if (!error) {
+        showNotification();
+    }
 }
 
 
 /** Show signup success notification */
 function showNotification() {
     clearField();
-    signupBtn.innerText = "You signed up successsfully."
+    signupBtn.innerText = "You signed up successfully."
     setTimeout(() => {
-            window.location.href = "index.html";
-            
-    }, 1000) 
+        window.location.href = "index.html";
+    }, 1000)
 }
 
 
@@ -194,4 +165,3 @@ function checkField() {
 
     return {'b':b, 'message': ""}
 }
-

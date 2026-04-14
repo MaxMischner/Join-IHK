@@ -31,18 +31,9 @@ function filterContacts() {
  * @var {Array<Object>} allContacts - An array of contact objects in the format { key: contactData }.
  */
   async function getAllContacts(preSelectedNames = []) {
-    let response = await fetch(BASE_URL_CONTACT + ".json");
-    let responseJSON = await response.json();
-    let keys = Object.keys(responseJSON);
-    let allContacts = [];
-  
-    for (let index = 0; index < keys.length; index++) {
-      let key = keys[index];
-      let value = responseJSON[key];
-      if (responseJSON[key]) allContacts.push({ [key]: value });
-    }
-  
-    renderContactsInDropdown(allContacts, preSelectedNames); 
+    const { data, error } = await db.from('contacts').select('*');
+    if (error) { console.error('Error fetching contacts:', error); return; }
+    renderContactsInDropdown(data || [], preSelectedNames);
   }
 
 /**
@@ -57,13 +48,12 @@ function filterContacts() {
  * @var {[string, Object]} key/value - The extracted key-value pair from each contact object.
  * @var {HTMLElement} contactItem - The DOM element representing a single contact entry.
  */
-  function renderContactsInDropdown(allContacts, preSelectedNames = []) {
+  function renderContactsInDropdown(contacts, preSelectedNames = []) {
     const container = document.getElementById("dropdownContent");
     container.innerHTML = "";
-  
-    allContacts.forEach((contactObj) => {
-      const [key, value] = Object.entries(contactObj)[0];
-      const contactItem = createContactItem(key, value, preSelectedNames); 
+
+    contacts.forEach((contact) => {
+      const contactItem = createContactItem(contact.id, contact, preSelectedNames);
       container.appendChild(contactItem);
     });
     handleSelectionChange();
