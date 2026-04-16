@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="./styles/standart.css">
     <link rel="stylesheet" href="./styles/summary.css">
     <link rel="stylesheet" href="styles/add_task.css">
-    
+    <link rel="stylesheet" href="styles/file-upload.css">
+
 </head>
 <body onload="addTaskInit()">
     <div onclick="closeOverlay(event)" id="overlay" class="overlay d-none" >
@@ -111,6 +112,20 @@
                                 <input class="input_field pointer" type="date" id="date-task">
                                 <p id="errorMsg-date" class="input-error">This field is required</p>
                             </div>
+
+                            <div class="file-upload-wrapper">
+                              <label for="fileInput">Attachments</label><br>
+                              <div id="fileDropArea" class="file-upload-drop-area" tabindex="0" role="button"
+                                   aria-label="Upload images. Click or press Enter to open file picker.">
+                                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" multiple hidden
+                                       aria-label="Select image files (JPG, PNG or WebP)">
+                                <span class="file-upload-icon" aria-hidden="true">🖼</span>
+                                <span class="file-upload-label">Click to upload images</span>
+                                <span class="file-upload-hint">JPG, PNG, WebP · max. 1 MB total</span>
+                              </div>
+                              <p id="errorMsg-file" class="file-upload-error" role="alert"></p>
+                              <div id="filePreviewList" class="file-preview-list"></div>
+                            </div>
                         </div>
                         <div class="splitbar"></div>
                     <div class="left-content-maincontent">
@@ -166,16 +181,14 @@
                               <img src="asset/img/icons/Subtasks icons11.png" onclick="addTodo()" />
                             </div>
                           </div>
-                          
-                          
                           <div id="todoList" class="subtask-list"></div>
-            
                       </div>
-                    </div>
-                    </div>
-                    <div class="validation-info mobile-only">
+                      <div class="validation-info mobile-only">
                         <p><span class="red-star">*</span>This field is required</p>
                       </div>
+
+                    </div>
+                    </div>
                     <div class="button_container desktop-only">
                         <p><span class="red-star">*</span>This field is required</p>
                         <div class="button-row">
@@ -185,22 +198,24 @@
                       </div>
                       
                       
+
+            </div>
                       <div class="fixed-buttons mobile-only">
                         <div class="button-row">
                           <button class="cancel-btn" onclick="resetForm()">Clear <img src="asset/img/icons/subtasks_icons_X.png" alt=""></button>
                           <button class="create-btn" onclick="if (validateTaskBeforeSave()) saveTask()">Create Task <img src="asset/img/icons/check.png" alt=""></button>
                         </div>
                       </div>
-                
             </div>
-            </div> 
-        
+
         </div>
     </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>
+<script src="/js/file-upload.js"></script>
+<script src="/js/image-viewer.js"></script>
 <script src="/js/add_task.js"></script>
 <script src="js/add_task_support.js"></script>
 <script src="js/add_task_event&restrict.js"></script>

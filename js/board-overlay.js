@@ -151,16 +151,19 @@ async function deleteTaskCompletely(index) {
 
 /**
  * Opens the add-task overlay or redirects to add_task.html on mobile.
+ * @param {string} [columnStatus='To do'] - The column status to pre-assign to the new task.
  */
-function renderAddTaskOverlay() {
+function renderAddTaskOverlay(columnStatus = 'To do') {
+    status = columnStatus;
     const isMobile = window.innerWidth <= 1200;
     if (isMobile) {
-        window.location.href = `add_task.html`;
+        window.location.href = `add_task.html?status=${encodeURIComponent(columnStatus)}`;
     } else {
         let overlay = document.getElementById('overlayAddTask');
         overlay.innerHTML = showAddTaskOverlay();
         overlay.classList.remove('d-none');
         getAllContacts();
+        initFileUpload();
     }
 }
 
@@ -212,15 +215,12 @@ function renderEditTaskOverlay(index) {
     if (task.subtasks && task.subtasks.length > 0) {
         const todoList = document.getElementById("todoList");
         task.subtasks.forEach((subtask) => {
-            const item = document.createElement("div");
-            item.className = "subtask-list-item";
-            item.textContent = subtask.name;
+            const item = buildSubtaskItem(subtask.name);
             item.dataset.completed = subtask.completed;
-            item.dataset.name = subtask.name;
-            item.addEventListener("click", () => editSubtask(item, subtask.name));
             todoList.appendChild(item);
         });
     }
+    initFileUpload(task.attachments || []);
 }
 
 /**
@@ -239,6 +239,7 @@ async function saveEditedTask(index) {
         priority,
         status: task.status,
         subtasks,
+        attachments: collectAttachments(),
     };
     await db.from('tasks').update(updatedData).eq('id', taskId);
     closeAddTaskOverlay();
@@ -246,6 +247,19 @@ async function saveEditedTask(index) {
     await getAllTasks();
     renderTasks();
     renderTaskDetail(index);
+    showBoardToast('Task updated');
+}
+
+/**
+ * Shows a brief toast notification on the board, then removes it automatically.
+ * @param {string} message - The text to display in the toast.
+ */
+function showBoardToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'notifaction-btn';
+  toast.innerText = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 1500);
 }
 
 /**

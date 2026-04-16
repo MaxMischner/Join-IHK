@@ -140,7 +140,12 @@ document.addEventListener("click", function (event) {
  */
   function renderActiveUserInitials() {
     const user = JSON.parse(localStorage.getItem("activeUser"));
-    if (user) renderInitials(user);
+    const guestUser = localStorage.getItem("guestUser");
+    if (user) {
+      renderInitials(user);
+    } else if (guestUser) {
+      document.getElementById('initialNames').innerHTML = "G";
+    }
   }
   
   function setDefaultMediumPriority() {
@@ -201,29 +206,17 @@ window.addEventListener("DOMContentLoaded", () => {
  * @var {HTMLSelectElement} categoryField - The dropdown select element for the task category.
  */
 function validateTaskBeforeSave() {
+    const fields = [
+      { id: "title-task",         errorId: "errorMsg-title" },
+      { id: "date-task",          errorId: "errorMsg-date" },
+      { id: "assigned_category",  errorId: "errorMsg-category" },
+    ];
     let isValid = true;
-    const titleField = document.getElementById("title-task");
-    const dateField = document.getElementById("date-task");
-    const categoryField = document.getElementById("assigned_category");
-  
-    if (!titleField.value.trim()) {
-      showError(titleField, "errorMsg-title");
-      isValid = false;
-    } else {
-      hideError(titleField, "errorMsg-title");
-    }
-    if (!dateField.value.trim()) {
-      showError(dateField, "errorMsg-date");
-      isValid = false;
-    } else {
-      hideError(dateField, "errorMsg-date");
-    }
-    if (!categoryField.value.trim()) {
-      showError(categoryField, "errorMsg-category");
-      isValid = false;
-    } else {
-      hideError(categoryField, "errorMsg-category");
-    }
+    fields.forEach(({ id, errorId }) => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { showError(el, errorId); isValid = false; }
+      else hideError(el, errorId);
+    });
     return isValid;
   }
   
@@ -263,4 +256,5 @@ function validateTaskBeforeSave() {
     if (mediumBtn) {
       selectPriority(mediumBtn);
     }
+    resetFileUpload();
   }

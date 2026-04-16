@@ -14,6 +14,7 @@ let subtasks = "";
 function addTaskInit() {
   if (!isUserAuthenticated()) return;
 
+  applyStatusFromUrl();
   getAllContacts();
   setupPriorityButtons();
   restrictDueDateToToday();
@@ -21,6 +22,16 @@ function addTaskInit() {
   renderActiveUserInitials();
   setDefaultMediumPriority();
   setupSubtaskEnterShortcut();
+  initFileUpload();
+}
+
+/**
+ * Reads the ?status= URL parameter and sets the global status variable.
+ * Only applies on add_task.html when navigated from the board.
+ */
+function applyStatusFromUrl() {
+  const param = new URLSearchParams(window.location.search).get('status');
+  if (param) status = param;
 }
 
 /**
@@ -67,18 +78,45 @@ function toggleDropdown() {
 function addTodo() {
   const input = document.getElementById("todoInput");
   const value = input.value.trim();
-  if (value !== "") {
-    const todoList = document.getElementById("todoList");
-    const item = document.createElement("div");
-    item.className = "subtask-list-item";
-    item.textContent = value;
-    item.dataset.completed = "false";
-    item.dataset.name = value;
-    item.addEventListener("click", () => editSubtask(item, value));
-    todoList.appendChild(item);
-    input.value = "";
-    toggleSubtaskIcons();
-  }
+  if (value === "") return;
+  document.getElementById("todoList").appendChild(buildSubtaskItem(value));
+  input.value = "";
+  toggleSubtaskIcons();
+}
+
+/**
+ * Builds a subtask list item with a text span and hover action icons.
+ * @param {string} value - The subtask text.
+ * @returns {HTMLElement} The constructed subtask item element.
+ */
+function buildSubtaskItem(value) {
+  const item = document.createElement("div");
+  item.className = "subtask-list-item";
+  item.dataset.completed = "false";
+  item.dataset.name = value;
+  const text = document.createElement("span");
+  text.className = "subtask-text";
+  text.textContent = value;
+  item.append(text, createSubtaskItemActions(item));
+  return item;
+}
+
+/**
+ * Creates the edit/delete action icons shown on subtask hover.
+ * @param {HTMLElement} item - The parent subtask-list-item element.
+ * @returns {HTMLElement} The actions container div.
+ */
+function createSubtaskItemActions(item) {
+  const wrap = document.createElement('div');
+  wrap.className = 'subtask-item-actions';
+  const editBtn = createIconButton('/asset/images/edit.svg', 'Edit',
+    (e) => { e.stopPropagation(); editSubtask(item, item.dataset.name); });
+  editBtn.className = 'subtask-action-icon';
+  const del = createIconButton('/asset/img/icons/delete.png', 'Delete',
+    (e) => { e.stopPropagation(); item.remove(); });
+  del.className = 'subtask-action-icon';
+  wrap.append(editBtn, createDivider(), del);
+  return wrap;
 }
 
 /**
@@ -151,11 +189,7 @@ function createSaveButton(item, input) {
  * Builds a new subtask element.
  */
 function createNewSubtaskItem(value) {
-  const newItem = document.createElement("div");
-  newItem.className = "subtask-list-item";
-  newItem.textContent = value;
-  newItem.addEventListener("click", () => editSubtask(newItem, value));
-  return newItem;
+  return buildSubtaskItem(value);
 }
 
 /**
@@ -237,6 +271,5 @@ async function getAllTasks() {
 async function putTask(data, id = "") {
   const { data: result, error } = await db.from('tasks').insert(data).select().single();
   if (error) { console.error(error); return null; }
-  console.log("Response:", result);
   return result;
 }

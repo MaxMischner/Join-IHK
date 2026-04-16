@@ -145,7 +145,7 @@
 }
 
 .content-left {
-    max-width: calc(1920px - 232px);
+    max-width: calc(1440px - 232px);
     height: calc(100vh - 96px);
     overflow-x: hidden;
     overflow-y: auto;

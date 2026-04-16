@@ -154,8 +154,8 @@ body {
 .board-splits-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;      
-    padding: 0 110px 0 20px;
+    justify-content: space-around;
+    padding: 0 20px 0 20px;
     flex-wrap: wrap;
 }
 
@@ -1098,7 +1098,11 @@ body {
     }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 780px) {
+    body {
+        overflow-x: visible;
+    }
+
     .headline {
         margin: 20px;
     }
@@ -1110,16 +1114,19 @@ body {
     }
 
     .tasks-content {
-        max-width: 180px;
+        max-width: 280px;
+        min-width: 225px;
     }
     
     .board-splits-content {
         display: flex;
         flex-direction: row;
-        justify-content: baseline;
-        max-width: 92%;
-        overflow-x: auto;     
-        scrollbar-width: none;  
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 8px;
     }
 
     .add-task-container {
@@ -1183,10 +1190,17 @@ body {
 
 }
 
+@media (max-width: 580px) {
+    .board-splits-container {
+        padding: 0 8px 0 8px;
+    }
+}
+
 @media (max-width: 460px) {
 
     .content-left-board {
-        margin-left: 10px;
+        padding-left: 10px;
+        box-sizing: border-box;
     }
     .headline-board {
         width: 93%;

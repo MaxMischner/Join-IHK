@@ -17,6 +17,7 @@ async function init() {
     await getAllTasks();
     await getAllContactsBoard();
     await renderTasks();
+    initDragToScroll();
 }
 
 /**
@@ -215,4 +216,73 @@ function getDoneSubtasks(index) {
     if (!subTasks) return;
     let doneSubtasks = subTasks.filter(subtask => subtask.completed === true);
     return doneSubtasks.length;
+}
+
+/**
+ * Enables click-and-drag horizontal scrolling on all .board-splits-content containers.
+ */
+function initDragToScroll() {
+    document.querySelectorAll('.board-splits-content').forEach(attachDragScroll);
+}
+
+/**
+ * Attaches drag-to-scroll behaviour to a single container.
+ * @param {HTMLElement} c - The scrollable container element.
+ */
+function attachDragScroll(c) {
+    const s = { isDown: false, startX: 0, scrollLeft: 0, hasDragged: false };
+    c.style.userSelect = 'none';
+    c.addEventListener('mousedown', (e) => onScrollDown(e, c, s));
+    c.addEventListener('dragstart', (e) => { if (s.isDown) e.preventDefault(); });
+    document.addEventListener('mousemove', (e) => onScrollMove(e, c, s));
+    document.addEventListener('mouseup', () => onScrollUp(c, s));
+    c.addEventListener('click', (e) => onScrollClick(e, s), true);
+}
+
+/**
+ * Records drag start position on mousedown.
+ * @param {MouseEvent} e
+ * @param {HTMLElement} c
+ * @param {Object} s - State object.
+ */
+function onScrollDown(e, c, s) {
+    if (e.button !== 0) return;
+    s.isDown = true; s.hasDragged = false;
+    s.startX = e.clientX; s.scrollLeft = c.scrollLeft;
+}
+
+/**
+ * Scrolls the container during mousemove if dragging.
+ * @param {MouseEvent} e
+ * @param {HTMLElement} c
+ * @param {Object} s
+ */
+function onScrollMove(e, c, s) {
+    if (!s.isDown) return;
+    const walk = e.clientX - s.startX;
+    if (Math.abs(walk) > 8) {
+        s.hasDragged = true;
+        c.scrollLeft = s.scrollLeft - walk;
+        c.style.cursor = 'grabbing';
+    }
+}
+
+/**
+ * Resets drag state on mouseup.
+ * @param {HTMLElement} c
+ * @param {Object} s
+ */
+function onScrollUp(c, s) {
+    if (!s.isDown) return;
+    s.isDown = false;
+    c.style.cursor = '';
+}
+
+/**
+ * Suppresses click after a drag to prevent task detail from opening.
+ * @param {MouseEvent} e
+ * @param {Object} s
+ */
+function onScrollClick(e, s) {
+    if (s.hasDragged) { e.stopPropagation(); s.hasDragged = false; }
 }

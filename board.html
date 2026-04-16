@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./styles/board.css">
     <link rel="stylesheet" href="/styles/add_task.css">
     <link rel="stylesheet" href="styles/add_task_board.css">
+    <link rel="stylesheet" href="/styles/file-upload.css">
 </head>
 <body onload="init()"> 
  
@@ -119,7 +120,7 @@
                     <div ondrop="moveTo('To do')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">To Do</span>
-                            <img onclick="renderAddTaskOverlay(),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay('To do'),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
                         </div>
                         <div class="board-splits-content" id="ToDo"></div>
                         <div class="no-tasks" id="noTasksToDo">
@@ -131,7 +132,7 @@
                     <div ondrop="moveTo('in Progress')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">In Progress</span>
-                            <img onclick="renderAddTaskOverlay(),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay('in Progress'),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
                         </div>
 
                         <div class="board-splits-content" id="inProgress"></div>
@@ -144,7 +145,7 @@
                     <div ondrop="moveTo('await Feedback')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">Await feedback</span>
-                            <img onclick="renderAddTaskOverlay(),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay('await Feedback'),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
                         </div>
 
                         <div class="board-splits-content" id="await"></div>
@@ -174,6 +175,8 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-client.js"></script>
+<script src="/js/file-upload.js"></script>
+<script src="/js/image-viewer.js"></script>
 <script src="/asset/templats/board_tasks-template.js"></script>
 <script src="/js/add_task.js"></script>
 <script src="js/add_task_support.js"></script>

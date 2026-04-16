@@ -370,11 +370,26 @@ function selectPriority(button) {
 async function saveTask() {
   collectTaskData();
   let data = {
-    title,description,assigned,category,duedate,priority,status,subtasks,
+    title, description, assigned, category, duedate, priority, status, subtasks,
+    attachments: collectAttachments(),
   };
   await putTask(data);
   resetForm();
-  window.location.href = "board.html"; 
+  resetFileUpload();
+  showTaskToast('Task added to board');
+  setTimeout(() => { window.location.href = "board.html"; }, 1200);
+}
+
+/**
+ * Shows a brief toast notification on the page, then removes it automatically.
+ * @param {string} message - The text to display in the toast.
+ */
+function showTaskToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'notifaction-btn';
+  toast.innerText = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 1500);
 }
 
   

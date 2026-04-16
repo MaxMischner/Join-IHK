@@ -266,16 +266,17 @@ function showTaskDetail(index, names, subtasksClass) {
                     : ""
                 }
                 </div>    
+                ${renderAttachmentsInDetail(allTasks[index].attachments, index)}
                 <div class="task-detail-delete-edit-container">
                     <div onclick="deleteTask('${index}'),addTaskInit()" class="task-detail-delete-container">
                         <img class="task-detail-delete-image" src="/asset/images/board-task-detail-delete.png" alt="">
                         <Span class="task-detail-delete-text">Delete</Span>
-                    </div>     
+                    </div>
                     <div class="task-detail-delete-container-border"></div>
                     <div onclick="renderEditTaskOverlay(${index})" class="task-detail-delete-container">
                         <img class="task-detail-edit-image" src="/asset/images/board-task-detail-edit.png" alt="">
                         <Span class="task-detail-delete-text">Edit</Span>
-                    </div>                
+                    </div>
                 </div>
             </div>
         <div>     
@@ -326,6 +327,20 @@ function showAddTaskOverlay() {
                         <label for="date-task" class="required">Due date</label><br>
                         <input class="input_field" type="date" id="date-task">
                         <p id="errorMsg-date" class="input-error">This field is required</p>
+                    </div>
+
+                    <div class="file-upload-wrapper">
+                      <label for="fileInput">Attachments</label><br>
+                      <div id="fileDropArea" class="file-upload-drop-area" tabindex="0" role="button"
+                           aria-label="Upload images. Click or press Enter to open file picker.">
+                        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp"
+                               multiple hidden aria-label="Select image files (JPG, PNG or WebP)">
+                        <span class="file-upload-icon" aria-hidden="true">🖼</span>
+                        <span class="file-upload-label">Click to upload images</span>
+                        <span class="file-upload-hint">JPG, PNG, WebP · max. 1 MB total</span>
+                      </div>
+                      <p id="errorMsg-file" class="file-upload-error" role="alert"></p>
+                      <div id="filePreviewList" class="file-preview-list"></div>
                     </div>
                 </div>
                 <div class="splitbar"></div>
@@ -382,11 +397,9 @@ function showAddTaskOverlay() {
                         <img src="asset/img/icons/Subtasks icons11.png" onclick="addTodo()" />
                     </div>
                     </div>
-                    
-                    
                     <div id="todoList" class="subtask-list"></div>
-    
                 </div>
+
             </div>
             </div>
 
@@ -396,7 +409,7 @@ function showAddTaskOverlay() {
                     <button class="cancel-btn" onclick="resetForm()">Clear <img src="asset/img/icons/subtasks_icons_X.png" alt=""></button>
                     <button class="create-btn" onclick="if (validateTaskBeforeSave()) saveTask()">Create Task <img src="asset/img/icons/check.png" alt=""></button>
                 </div>
-                </div>  
+                </div>
         </div>
     `;
 }
@@ -438,6 +451,20 @@ function showEditTaskOverlay(task, index) {
                                  <label for="date-task" class="required">Due date</label><br>
                                  <input class="input_field input_field-board" type="date" id="date-task" value="${task.duedate}">
                                  <p id="errorMsg-date" class="input-error">This field is required</p>
+                             </div>
+
+                             <div class="file-upload-wrapper">
+                               <label for="fileInput">Attachments</label><br>
+                               <div id="fileDropArea" class="file-upload-drop-area" tabindex="0" role="button"
+                                    aria-label="Upload images. Click or press Enter to open file picker.">
+                                 <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp"
+                                        multiple hidden aria-label="Select image files (JPG, PNG or WebP)">
+                                 <span class="file-upload-icon" aria-hidden="true">🖼</span>
+                                 <span class="file-upload-label">Click to upload images</span>
+                                 <span class="file-upload-hint">JPG, PNG, WebP · max. 1 MB total</span>
+                               </div>
+                               <p id="errorMsg-file" class="file-upload-error" role="alert"></p>
+                               <div id="filePreviewList" class="file-preview-list"></div>
                              </div>
                          </div>
                         
@@ -493,11 +520,9 @@ function showEditTaskOverlay(task, index) {
                               <img src="asset/img/icons/Subtasks icons11.png" onclick="addTodo()" />
                             </div>
                           </div>
-                          
-                          
                           <div id="todoList" class="subtask-list"></div>
-             
                        </div>
+
                        <div class="button_container-board">
                              <p><span class="red-star">*</span>This field is required</p>
                              <div class="button-row-overlay">

@@ -1,2 +1,5 @@
 # ignore up.sh It is just git commands for mac user
 up.sh
+
+# Test data — not for production
+test-data.sql
