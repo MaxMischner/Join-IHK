@@ -3,7 +3,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    src: url('/asset/fonts/inter-v18-latin-regular.woff2') format('woff2');
+    src: url('../asset/fonts/inter-v18-latin-regular.woff2') format('woff2');
 }
 
 body {
@@ -325,7 +325,7 @@ body {
 }
 
 .tasks-content-done-text {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 120%;
     white-space: nowrap;
@@ -349,7 +349,7 @@ body {
 .assigned {
     width: 32px;
     height: 32px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
     border-radius: 45px;
@@ -375,21 +375,21 @@ body {
 }
 
 .priority-Low {
-    background-image: url('/asset/images/priority-low.png');
+    background-image: url('../asset/images/priority-low.png');
     width: 32px;
     height: 32px;
     object-fit: contain;
 }
 
 .priority-Medium {
-    background-image: url('/asset/images/priority-mid.png');
+    background-image: url('../asset/images/priority-mid.png');
     width: 32px;
     height: 32px;
     object-fit: contain;
 }
 
 .priority-Urgent {
-    background-image: url('/asset/images/priority-high.png');
+    background-image: url('../asset/images/priority-high.png');
     width: 32px;
     height: 32px;
     object-fit: contain;
@@ -528,7 +528,7 @@ body {
 }
 
 .task-detail-priority-Low {
-    background-image: url('/asset/images/priority-low.png');
+    background-image: url('../asset/images/priority-low.png');
     width: 17px;
     height: 17px;
     background-size: 17px 17px contain;
@@ -537,7 +537,7 @@ body {
 }
 
 .task-detail-priority-Medium {
-    background-image: url('/asset/images/priority-mid.png');
+    background-image: url('../asset/images/priority-mid.png');
     width: 17px;
     height: 17px;
     background-size: 17px 17px contain;
@@ -546,7 +546,7 @@ body {
 }
 
 .task-detail-priority-Urgent {
-    background-image: url('/asset/images/priority-high.png');
+    background-image: url('../asset/images/priority-high.png');
     width: 17px;
     height: 17px;
     background-size: 17px 17px contain;
@@ -595,7 +595,7 @@ body {
 .task-detail-assigned-initials {
     width: 42px;
     height: 42px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
     border-radius: 45px;
@@ -643,7 +643,7 @@ body {
 }
 
 .task-detail-subtask-image-on {
-    background-image: url('/asset/images/board-subtask-check-button.png');
+    background-image: url('../asset/images/board-subtask-check-button.png');
     width: 24px;
     height: 24px;
     margin-right: 16px;
@@ -657,7 +657,7 @@ body {
 }
 
 .task-detail-subtask-image-off {
-    background-image: url('/asset/images/board-subtask-check-button-hook.png');
+    background-image: url('../asset/images/board-subtask-check-button-hook.png');
     width: 24px;
     height: 24px;
     margin-right: 16px;

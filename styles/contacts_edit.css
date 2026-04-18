@@ -227,7 +227,8 @@ input:-webkit-autofill {
     color: red;
     font-size: 14px;
     margin-top: 20px;
-    display: none;
+    visibility: hidden;
+    min-height: 1.2em;
 }
 
 .edit-contact-bottom {

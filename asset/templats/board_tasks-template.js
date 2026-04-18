@@ -4,14 +4,14 @@ function showToDoTasks(index, subtasksClass, names) {
                 <div class="tasks-content-header margin">
                     <div class="tasks-content-${getCategoryClass(index)} ">${allTasks[index].category}</div>
                     <div class="move-to-button-mobile-container">
-                        <img onclick="openMoveTaskOverlay('overlayMoveToTodo_${index}', event)" class="move-to-button-mobile" src="/asset/images/move-to-button-mobile-board.svg" alt="">
+                        <img onclick="openMoveTaskOverlay('overlayMoveToTodo_${index}', event)" class="move-to-button-mobile" src="./asset/images/move-to-button-mobile-board.svg" alt="">
                             <div id="overlayMoveToTodo_${index}" class="overlay-move-to-button d-none" onclick="event.stopPropagation()">
                                 <div class="overlay-move-to-button-content">
                                     <div class="overlay-move-to-button-inner-content-headline">
                                         <a class="overlay-move-to-button-headline">Move to</a>
                                     </div>    
                                     <div onclick="moveToMobile('overlayMoveToTodo_${index}', '${index}', 'in Progress', event)" class="overlay-move-to-button-inner-content">
-                                        <img class="overlay-move-to-button-arrow" src="/asset/images/arrow_downward.svg" alt="">
+                                        <img class="overlay-move-to-button-arrow" src="./asset/images/arrow_downward.svg" alt="">
                                         <span>in Progress</span>
                                     </div>
                                 </div>
@@ -21,8 +21,8 @@ function showToDoTasks(index, subtasksClass, names) {
                 <span class="tasks-content-title margin">${allTasks[index].title}</span>
                 <span class="tasks-content-description margin">${allTasks[index].description}</span>
                 <div class="tasks-content-done ${subtasksClass}">
-                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index)}" max="${subTaskLenght(index)}" style="--value: 1; --max: ${subTaskLenght(index)};"></progress>
-                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLenght(index)} Subtasks</span>
+                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index)}" max="${subTaskLength(index)}" style="--value: 1; --max: ${subTaskLength(index)};"></progress>
+                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLength(index)} Subtasks</span>
                 </div>
                 <div class="assigned-priority-container margin">
                         <div class="assigned-container">
@@ -54,18 +54,18 @@ function showInProgressTasks(index, subtasksClass, names) {
                 <div class="tasks-content-header margin">
                     <div class="tasks-content-${getCategoryClass(index)}">${allTasks[index].category}</div>
                     <div class="move-to-button-mobile-container">
-                        <img onclick="openMoveTaskOverlay('overlayMoveToProgress_${index}', event)" class="move-to-button-mobile" src="/asset/images/move-to-button-mobile-board.svg" alt="">
+                        <img onclick="openMoveTaskOverlay('overlayMoveToProgress_${index}', event)" class="move-to-button-mobile" src="./asset/images/move-to-button-mobile-board.svg" alt="">
                             <div id="overlayMoveToProgress_${index}" class="overlay-move-to-button d-none" onclick="event.stopPropagation()">
                                 <div class="overlay-move-to-button-content">
                                     <div class="overlay-move-to-button-inner-content-headline">
                                         <a class="overlay-move-to-button-headline">Move to</a>
                                     </div>    
                                     <div onclick="moveToMobile('overlayMoveToProgress_${index}','${index}', 'To do', event)" class="overlay-move-to-button-inner-content">
-                                        <img class="overlay-move-to-button-arrow" src="/asset/images/arrow_upward.svg" alt="">
+                                        <img class="overlay-move-to-button-arrow" src="./asset/images/arrow_upward.svg" alt="">
                                         <span>To do</span>
                                     </div>
                                     <div onclick="moveToMobile('overlayMoveToProgress_${index}','${index}', 'await Feedback', event)" class="overlay-move-to-button-inner-content">
-                                        <img class="overlay-move-to-button-arrow" src="/asset/images/arrow_downward.svg" alt="">
+                                        <img class="overlay-move-to-button-arrow" src="./asset/images/arrow_downward.svg" alt="">
                                         <span>Feedback</span>
                                     </div>
                                 </div>
@@ -75,8 +75,8 @@ function showInProgressTasks(index, subtasksClass, names) {
                 <span class="tasks-content-title margin">${allTasks[index].title}</span>
                 <span class="tasks-content-description margin">${allTasks[index].description}</span>                
                 <div id="subtasks" class="tasks-content-done ${subtasksClass}">
-                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index)}" max="${subTaskLenght(index)}" style="--value: 1; --max: ${subTaskLenght(index)};"></progress>
-                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLenght(index)} Subtasks</span>
+                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index)}" max="${subTaskLength(index)}" style="--value: 1; --max: ${subTaskLength(index)};"></progress>
+                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLength(index)} Subtasks</span>
                 </div>                
                     <div class="assigned-priority-container margin">
                         <div class="assigned-container">
@@ -108,18 +108,18 @@ function showAwaitFeedbackTasks(index, subtasksClass, names) {
                 <div class="tasks-content-header margin">
                     <div class="tasks-content-${getCategoryClass(index)}">${allTasks[index].category}</div>
                     <div class="move-to-button-mobile-container">
-                        <img onclick="openMoveTaskOverlay('overlayMoveToAwaitFeedback_${index}', event)" class="move-to-button-mobile" src="/asset/images/move-to-button-mobile-board.svg" alt="">
+                        <img onclick="openMoveTaskOverlay('overlayMoveToAwaitFeedback_${index}', event)" class="move-to-button-mobile" src="./asset/images/move-to-button-mobile-board.svg" alt="">
                             <div id="overlayMoveToAwaitFeedback_${index}" class="overlay-move-to-button d-none" onclick="event.stopPropagation()">
                                 <div class="overlay-move-to-button-content">
                                     <div class="overlay-move-to-button-inner-content-headline">
                                         <a class="overlay-move-to-button-headline">Move to</a>
                                     </div>    
                                     <div onclick="moveToMobile('overlayMoveToAwaitFeedback_${index}','${index}', 'in Progress', event)" class="overlay-move-to-button-inner-content">
-                                        <img class="overlay-move-to-button-arrow" src="/asset/images/arrow_upward.svg" alt="">
+                                        <img class="overlay-move-to-button-arrow" src="./asset/images/arrow_upward.svg" alt="">
                                         <span>in Progress</span>
                                     </div>
                                     <div onclick="moveToMobile('overlayMoveToAwaitFeedback_${index}','${index}', 'done', event)" class="overlay-move-to-button-inner-content">
-                                        <img class="overlay-move-to-button-arrow" src="/asset/images/arrow_downward.svg" alt="">
+                                        <img class="overlay-move-to-button-arrow" src="./asset/images/arrow_downward.svg" alt="">
                                         <span>Done</span>
                                     </div>
                                 </div>
@@ -129,8 +129,8 @@ function showAwaitFeedbackTasks(index, subtasksClass, names) {
                 <span class="tasks-content-title margin">${allTasks[index].title}</span>
                 <span class="tasks-content-description margin">${allTasks[index].description}</span>
                 <div class="tasks-content-done ${subtasksClass}">
-                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index)}" max="${subTaskLenght(index)}" style="--value: 1; --max: ${subTaskLenght(index)};"></progress>
-                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLenght(index)} Subtasks</span>
+                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index)}" max="${subTaskLength(index)}" style="--value: 1; --max: ${subTaskLength(index)};"></progress>
+                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLength(index)} Subtasks</span>
                 </div>
                 <div class="assigned-priority-container margin">
                     <div class="assigned-container">
@@ -162,14 +162,14 @@ function showDoneTasks(index, subtasksClass, names) {
                 <div class="tasks-content-header margin">
                     <div class="tasks-content-${getCategoryClass(index)}">${allTasks[index].category}</div>
                     <div class="move-to-button-mobile-container">
-                        <img onclick="openMoveTaskOverlay('overlayMoveToDone_${index}', event)" class="move-to-button-mobile" src="/asset/images/move-to-button-mobile-board.svg" alt="">
+                        <img onclick="openMoveTaskOverlay('overlayMoveToDone_${index}', event)" class="move-to-button-mobile" src="./asset/images/move-to-button-mobile-board.svg" alt="">
                             <div id="overlayMoveToDone_${index}" class="overlay-move-to-button d-none" onclick="event.stopPropagation()">
                                 <div class="overlay-move-to-button-content">
                                     <div class="overlay-move-to-button-inner-content-headline">
                                         <a class="overlay-move-to-button-headline">Move to</a>
                                     </div>    
                                     <div onclick="moveToMobile('overlayMoveToDone_${index}','${index}', 'await Feedback', event)" class="overlay-move-to-button-inner-content">
-                                        <img class="overlay-move-to-button-arrow" src="/asset/images/arrow_upward.svg" alt="">
+                                        <img class="overlay-move-to-button-arrow" src="./asset/images/arrow_upward.svg" alt="">
                                         <span>Feedback</span>
                                     </div>
                                 </div>
@@ -179,8 +179,8 @@ function showDoneTasks(index, subtasksClass, names) {
                 <span class="tasks-content-title margin">${allTasks[index].title}</span>
                 <span class="tasks-content-description margin">${allTasks[index].description}</span>
                 <div class="tasks-content-done ${subtasksClass}">
-                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index )}" max="${subTaskLenght(index)}" style="--value: 1; --max: ${subTaskLenght(index)};"></progress>
-                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLenght(index)} Subtasks</span>
+                    <progress class="tasks-content-done-progressbar" class="progress-bar" value="${getDoneSubtasks(index )}" max="${subTaskLength(index)}" style="--value: 1; --max: ${subTaskLength(index)};"></progress>
+                    <span class="tasks-content-done-text">${getDoneSubtasks(index)}/${subTaskLength(index)} Subtasks</span>
                 </div>
                 <div class="assigned-priority-container margin">
                     <div class="assigned-container">
@@ -212,7 +212,7 @@ function showTaskDetail(index, names, subtasksClass) {
             <div  onclick="noBubbling(event)" class="task-detail-container">
                 <div class="task-detail-head">
                     <span class="overlay-tasks-content-${getCategoryClass(index)}">${allTasks[index].category}</span>
-                    <img onclick="closeOverlay()" class="task-detail-close-button" src="/asset/images/board-close-overlay.png" alt="">
+                    <img onclick="closeOverlay()" class="task-detail-close-button" src="./asset/images/board-close-overlay.png" alt="">
                 </div>
                 <span class="task-detail-title">${allTasks[index].title}</span>
                 <span class="task-detail-description">${allTasks[index].description}</span>
@@ -269,12 +269,12 @@ function showTaskDetail(index, names, subtasksClass) {
                 ${renderAttachmentsInDetail(allTasks[index].attachments, index)}
                 <div class="task-detail-delete-edit-container">
                     <div onclick="deleteTask('${index}'),addTaskInit()" class="task-detail-delete-container">
-                        <img class="task-detail-delete-image" src="/asset/images/board-task-detail-delete.png" alt="">
+                        <img class="task-detail-delete-image" src="./asset/images/board-task-detail-delete.png" alt="">
                         <Span class="task-detail-delete-text">Delete</Span>
                     </div>
                     <div class="task-detail-delete-container-border"></div>
                     <div onclick="renderEditTaskOverlay(${index})" class="task-detail-delete-container">
-                        <img class="task-detail-edit-image" src="/asset/images/board-task-detail-edit.png" alt="">
+                        <img class="task-detail-edit-image" src="./asset/images/board-task-detail-edit.png" alt="">
                         <Span class="task-detail-delete-text">Edit</Span>
                     </div>
                 </div>
@@ -311,7 +311,7 @@ function showAddTaskOverlay() {
         <div id="addTaskOverlay" class="add-task-overlay-board slide-in wide-overlay" onclick="noBubbling(event)">                   
             <div class="add-task-overlay-close-button">
                 <span class="add-task-overlay-close-header">Add Task</span>
-                <img onclick="closeAddTaskOverlay()" class="task-detail-close-button" src="/asset/images/board-close-overlay.png" alt=""></div>
+                <img onclick="closeAddTaskOverlay()" class="task-detail-close-button" src="./asset/images/board-close-overlay.png" alt=""></div>
             <div class="content_box">
                 <div class="left-content-maincontent">
                     <div class="element-container">
@@ -434,7 +434,7 @@ function showEditTaskOverlay(task, index) {
          <div id="addTaskOverlay" class="add-task-overlay slide-in" onclick="noBubbling(event)">                    
              <div class="add-task-overlay-close-button-board">
                  <span class="add-task-overlay-close-header"></span>
-                 <img onclick="closeAddTaskOverlay()" class="task-detail-close-button" src="/asset/images/board-close-overlay.png" alt=""></div>
+                 <img onclick="closeAddTaskOverlay()" class="task-detail-close-button" src="./asset/images/board-close-overlay.png" alt=""></div>
              <div class="main_Box-board">                    
                      <div class="content_box-board">
                          <div class="left-content-maincontent">

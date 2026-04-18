@@ -609,7 +609,8 @@ select:focus {
   font-size: 14px;
   margin-top: 4px;
   margin-bottom: 12px;
-  display: none;
+  visibility: hidden;
+  min-height: 1.2em;
 }
 .input_field.error {
   border: 1px solid red;

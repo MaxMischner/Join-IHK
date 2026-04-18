@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary || Join</title>
-    <link rel="icon" href="/asset/images/fav.svg" type="image/svg+xml">
+    <link rel="icon" href="./asset/images/fav.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/sidebar.css">
     <link rel="stylesheet" href="./styles/standart.css">
@@ -31,7 +31,7 @@
     </div>
     <div class="content widescreen">
         
-        <div class="sidebar-dummy">
+        <nav class="sidebar-dummy">
             <img class="pointer" src="./asset/images/logo-light.svg" alt="" onclick="window.location.reload()">
             <ul class="sidebar-middle">
                 <li class="sidebar-li-selected pointer">
@@ -67,9 +67,9 @@
                     <a href="legal-notice.html">Legal Notice</a>
                 </li>
             </ul>
-        </div>
+        </nav>
 
-        <img id="waitLogo" class="wait-logo" src="/asset/images/logo.svg" alt="">
+        <img id="waitLogo" class="wait-logo" src="./asset/images/logo.svg" alt="">
 
         <div id="mainContainer" class="main-container d-none">   
             <header class="header">
@@ -98,7 +98,7 @@
             <div id="mobileGreetingGuest" class="mobile-greting-guest d-none">
                 <span id="mobileGreetingGuestGreet" class="content-right-text-greeting"></span>
             </div>
-            <div id="summaryContentLeft" class="content-left">
+            <main id="summaryContentLeft" class="content-left">
                 <div class="headline">
                     <span class="headline-left">Join 360</span>
                     <div class="headline-border"></div>
@@ -126,7 +126,7 @@
                             </div>
                             <div onclick="location.href='board.html';" class="summary-tasks-urgent-container white-card">                           
                                 <div class="summary-tasks-urgent">
-                                    <img class="summary-tasks-urgent-image" src="/asset/images/2-arrows-up-red-circle.png" alt="">
+                                    <img class="summary-tasks-urgent-image" src="./asset/images/2-arrows-up-red-circle.png" alt="">
                                     <div class="summary-tasks-todo-container">   
                                         <span id="urgent" class="summary-tasks-todo-number">0</span>
                                         <span class="summary-tasks-todo-text"><To-do>Urgent</span>  
@@ -157,20 +157,20 @@
                             <span id="greeting" class="content-right-text-greeting">Hello</span>
                             <span id="userName" class="content-right-text-name"></span>
                         </div>
-                    </div>      
-            </div> 
-        
+                    </div>
+            </main>
+
         </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/js/supabase-client.js"></script>
+<script src="./js/supabase-client.js"></script>
 <script src="js/script-loggedin.js"></script>
-<script src="/script.js"></script>
+<script src="./script.js"></script>
 
-<script src="/js/summary.js"></script>
-<script src="/js/users.js"></script>
-<script src="/js/moment.js"></script>
-<script src="/js/log_in.js"></script>
-<script src="/js/add_task.js"></script>
+<script src="./js/summary.js"></script>
+<script src="./js/users.js"></script>
+<script src="./js/moment.js"></script>
+<script src="./js/log_in.js"></script>
+<script src="./js/add_task.js"></script>
 </html>

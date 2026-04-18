@@ -15,7 +15,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    src: url('/asset/fonts/inter-v18-latin-regular.woff2') format('woff2');
+    src: url('../asset/fonts/inter-v18-latin-regular.woff2') format('woff2');
 }
 body {
     overflow-x: hidden;

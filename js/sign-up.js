@@ -10,14 +10,14 @@ let signupBtn = document.getElementById("signupBtn");
 /** Clear error message */
 function clearErrorMsg () {
     signupBtn.innerText = "Sign Up";
-    errorMSG.style.display = "none";
+    errorMSG.style.visibility = "hidden";
     errorMSG.innerText = "";
 }
 
 
 /** Clear all fields */
 function clearField () {
-    errorMSG.style.display = "none";
+    errorMSG.style.visibility = "hidden";
     signupName.value = "";
     signupEmail.value = "";
     password.value = "";
@@ -30,7 +30,7 @@ function clearField () {
 async function signup() {
     let obj = checkField();
     if (!obj["b"]) {
-        errorMSG.style.display = "block";
+        errorMSG.style.visibility = "visible";
         errorMSG.innerText = obj["message"];
 
         if (obj["type"] == "password") {
@@ -109,7 +109,7 @@ function validatePasswordAgain() {
 /** Validate if the mail is already in DB */
 async function checkEmail() {
     if (!validateUsername() || !validateEmail() || !validatePassword() || !validatePasswordAgain()) {
-        errorMSG.style.display = "block";
+        errorMSG.style.visibility = "visible";
         return false;
     }
     signupBtn.disabled = true;
@@ -118,7 +118,7 @@ async function checkEmail() {
     if (error) { console.error(error); signupBtn.disabled = false; return; }
     if (existingUsers && existingUsers.length > 0) {
         signupBtn.disabled = false;
-        errorMSG.style.display = "block";
+        errorMSG.style.visibility = "visible";
         errorMSG.innerText = "The email is already used.";
     } else {
         signupUser();

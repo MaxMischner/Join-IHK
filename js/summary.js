@@ -150,26 +150,6 @@ function renderContent() {
 
 
 /**
- * Renders the initials of the active user into the DOM.
- * 
- * If no user is active, a default letter "G" is shown.
- * If a user is present, the initials are generated from the user's name.
- * 
- * @param {Array<Object>} activeUser - An array with one user object that contains a `name` property.
- * @property {string} activeUser[].name - The full name of the active user (e.g., "John Doe").
- */
-function renderInitials(activeUser) {
-    if (!activeUser) {
-        document.getElementById('initialNames').innerHTML = "G"; 
-   }else {
-        let originalName = activeUser[0].name;
-        let initials = originalName.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase();
-        document.getElementById('initialNames').innerHTML = initials; 
-    }
-}
-
-
-/**
  * Fetches all task data from the Firebase database and processes it for display on the summary page.
  * 
  * The function retrieves all tasks from the database, extracts their keys, and iterates over each task. 

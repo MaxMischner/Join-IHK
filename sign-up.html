@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up || Join</title>
-    <link rel="icon" href="/asset/images/fav.svg" type="image/svg+xml">
+    <link rel="icon" href="./asset/images/fav.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="/styles/sign_up.css">
-    <link rel="stylesheet" href="/styles/standart.css">
+    <link rel="stylesheet" href="./styles/sign_up.css">
+    <link rel="stylesheet" href="./styles/standart.css">
 </head>
 
 <body>
     <div class="content">
         
         <div class="content-top">
-            <img class="logo" src="/asset/images/logo.svg" alt="">
+            <img class="logo" src="./asset/images/logo.svg" alt="">
         </div>
         <div class="signup-container">
             <div class="signup-headerline-with-arrow">
@@ -24,11 +24,11 @@
                 </div>
             </div>
             <form onsubmit="signup();return false" class="signup-forms" action="">
-                <input id="signupName"  class="signup-input-field-name text-field" type="text" placeholder="Name" oninput="clearErrorMsg();">
-                <input id="signupEmail"class="signup-input-field-mail text-field"type="text" placeholder="Email"  oninput="clearErrorMsg();"/>
-                <input id="signupPassword"  class="signup-input-field-password text-field" type="password" placeholder="Password" oninput="clearErrorMsg()">
-                <input id="signupPasswordAgain"  class="signup-input-field-password text-field" type="password" placeholder="Confirm Password" oninput="clearErrorMsg()">
-                <div id="error-msg" class="d-none" style="padding: 10px; color:#ff8190">
+                <input id="signupName"  class="signup-input-field-name text-field" type="text" placeholder="Name" oninput="clearErrorMsg();" onblur="if(!validateUsername()){ errorMSG.style.visibility='visible'; }">
+                <input id="signupEmail"class="signup-input-field-mail text-field"type="text" placeholder="Email"  oninput="clearErrorMsg();" onblur="if(!validateEmail()){ errorMSG.style.visibility='visible'; }"/>
+                <input id="signupPassword"  class="signup-input-field-password text-field" type="password" placeholder="Password" oninput="clearErrorMsg();" onblur="if(!validatePassword()){ errorMSG.style.visibility='visible'; }">
+                <input id="signupPasswordAgain"  class="signup-input-field-password text-field" type="password" placeholder="Confirm Password" oninput="clearErrorMsg();" onblur="if(!validatePasswordAgain()){ errorMSG.style.visibility='visible'; }">
+                <div id="error-msg" style="visibility:hidden; padding: 10px; color:#ff8190; min-height:1.2em;">
                     The passwords are not consistent.
                 </div>
                 <div style="margin-top: 20px;">
@@ -52,9 +52,9 @@
     </div>    
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/js/supabase-client.js"></script>
-<script src="/js/users.js"></script>
-<script src="/js/sign-up.js"></script>
-<script src="/script.js"></script>
+<script src="./js/supabase-client.js"></script>
+<script src="./js/users.js"></script>
+<script src="./js/sign-up.js"></script>
+<script src="./script.js"></script>
 
 </html>

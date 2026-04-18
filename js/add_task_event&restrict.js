@@ -108,6 +108,9 @@ document.addEventListener("click", function (event) {
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener("input", () => hideError(el, errorId));
+        el.addEventListener("blur", () => {
+          if (!el.value.trim()) showError(el, errorId);
+        });
       }
     });
   }
@@ -250,7 +253,7 @@ function validateTaskBeforeSave() {
     document.getElementById("todoInput").value = "";
     document.querySelectorAll(".error").forEach((el) => {el.classList.remove("error");
     });
-    document.querySelectorAll(".input-error").forEach((msg) => {msg.style.display = "none";
+    document.querySelectorAll(".input-error").forEach((msg) => {msg.style.visibility = "hidden";
     });
     const mediumBtn = document.querySelector(".priorty_button.medium");
     if (mediumBtn) {

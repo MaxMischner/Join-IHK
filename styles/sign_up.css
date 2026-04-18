@@ -112,15 +112,15 @@
 }
 
 .signup-input-field-name {
-    background-image: url('/asset/images/person.png');
+    background-image: url('../asset/images/person.png');
 }
 
 .signup-input-field-mail {
-    background-image: url('/asset/images/grey-mail.svg');
+    background-image: url('../asset/images/grey-mail.svg');
 }
 
 .signup-input-field-password{
-    background-image: url('/asset/images/lock.svg');
+    background-image: url('../asset/images/lock.svg');
 }
 
 .signup-cb-label {

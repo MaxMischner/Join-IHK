@@ -141,13 +141,11 @@ function getCategoryClass(index) {
 /**
  * Returns the number of subtasks for a task.
  */
-function subTaskLenght(index) {
+function subTaskLength(index) {
     if (allTasks[index].subtasks) {
-        subTaskLength = allTasks[index].subtasks.length;
-    } else {
-        subTaskLength = "";
+        return allTasks[index].subtasks.length;
     }
-    return subTaskLength;
+    return "";
 }
 
 function noBubbling(event) {

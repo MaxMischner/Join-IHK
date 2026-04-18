@@ -69,7 +69,7 @@ function renderContactList(obj) {
             let initials = extracNameInitials(contact.name);
             listCardHTML += getContactListCard(initials, contact.name, contact.email, contact.id, contact.color);
         });
-        contactListDIVHTML += getConactLetterContainer(key, listCardHTML);
+        contactListDIVHTML += getContactLetterContainer(key, listCardHTML);
     });
     contactListDIV.innerHTML = contactListDIVHTML; 
     moveToEditedLi();
@@ -122,7 +122,7 @@ function clickContactCard(id) {
  */
 function renderContactDetail(id) {
     const cont = allContacts.filter(c => c.id == id)[0];
-    contactDetailDIV.innerHTML = getConactDetail(extracNameInitials(cont.name), cont.name, cont.email, cont.phone, id, cont.color);
+    contactDetailDIV.innerHTML = getContactDetail(extracNameInitials(cont.name), cont.name, cont.email, cont.phone, id, cont.color);
 }
 
 
@@ -217,12 +217,12 @@ async function saveEditContact(e) {
 
     [nameField, emailField, phoneField] = getFormFields();
     const errorMSG = document.getElementById("edit-contact-error");
-    if (!validAllForm(nameField, emailField, phoneField, errorMSG)) {errorMSG.style.display = "block"; return;}
+    if (!validAllForm(nameField, emailField, phoneField, errorMSG)) {errorMSG.style.visibility = "visible"; return;}
     const initialsDIV = document.getElementById("edit-contact-intitals");
    
     let user = allContacts.find(c => (c.email == emailField.value && c.id != currentID));
     if(user) {
-        errorMSG.style.display = "block";
+        errorMSG.style.visibility = "visible";
         errorMSG.innerText = "The email is already used.";
         emailField.classList.add("red-border");
     } else {
@@ -255,6 +255,13 @@ async function putContact(data, id="", e) {
     btn.disabled = false;
     contactOverlay.classList.add("d-none");
     currentID = resultId;
+    const msg = id ? "Contact successfully updated" : "Contact successfully created";
+    document.body.appendChild(getNotification(msg));
+    setTimeout(() => {
+        if (document.getElementById("notification-id")) {
+            document.body.removeChild(document.getElementById("notification-id"));
+        }
+    }, 2000);
     updatePageInfo();
 }
 
@@ -281,7 +288,7 @@ function updatePageInfo() {
  */
 function updateContactDetail(bgColor, inital, name, email, phone){
     if (contactDetailDIV.innerHTML == "") {
-        contactDetailDIV.innerHTML = getConactDetail("", "", "", "", "", "");
+        contactDetailDIV.innerHTML = getContactDetail("", "", "", "", "", "");
     }
 
     const detailLogo = document.getElementById("contact-detail-header-logo");
@@ -349,10 +356,27 @@ function showInitalPlaceholderImage(initialsDIV) {
 }
 
 
+/** Validate a single contact field onBlur */
+function validateContactFieldOnBlur(fieldId, type) {
+    const field = document.getElementById(fieldId);
+    const errorMSG = document.getElementById("edit-contact-error");
+    let result;
+    if (type === 'name')  result = validateUsername(field.value);
+    if (type === 'email') result = validateEmail(field.value);
+    if (type === 'phone') result = validatePhone(field.value);
+    const [valid, msg] = result;
+    if (!valid) {
+        errorMSG.innerText = msg;
+        errorMSG.style.visibility = "visible";
+        field.classList.add("red-border");
+    }
+}
+
+
 /** Clear error message */
 function clearErrorMsg() {
     const errorMSG = document.getElementById("edit-contact-error");
-    errorMSG.style.display = "none";
+    errorMSG.style.visibility = "hidden";
     errorMSG.innerText = "";
 
     document.getElementById("edit-contact-name").classList.remove("red-border");

@@ -36,25 +36,25 @@
     width: 69px;
     height: 69px;
     margin-right: 15px;
-    background-image: url('/asset/images/pencil-white-black-circle.svg');
+    background-image: url('../asset/images/pencil-white-black-circle.svg');
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .white-card:hover .summary-tasks-todo-image {
-    background-image: url('/asset/images/pencil-black-white-circle.svg');
+    background-image: url('../asset/images/pencil-black-white-circle.svg');
 }
 
 .summary-tasks-done-image {
     width: 69px;
     height: 69px;
     margin-right: 15px;
-    background-image: url('/asset/images/hook-white-black-circle.svg');
+    background-image: url('../asset/images/hook-white-black-circle.svg');
     background-size: contain;
 }
 
 .white-card:hover .summary-tasks-done-image {
-    background-image: url('/asset/images/hook-black-white-circle.svg');
+    background-image: url('../asset/images/hook-black-white-circle.svg');
 }
 .summary-tasks-todo-container {
     display: flex;

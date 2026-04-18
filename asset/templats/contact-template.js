@@ -13,7 +13,7 @@ function getContactListCard(initials, name, email, id, color) {
             `;
 }
 
-function getConactLetterContainer(letter, allCardHTML) {
+function getContactLetterContainer(letter, allCardHTML) {
     return `<div class="contact-container">
                             <div class="contact-letter">${letter}</div>
                             <div class="contact-underline"></div>
@@ -23,7 +23,7 @@ function getConactLetterContainer(letter, allCardHTML) {
                         </div>`;
 }
 
-function getConactDetail(initials, name, email, phone, id, color) {
+function getContactDetail(initials, name, email, phone, id, color) {
     return `<div class="contact-detail-header flex">
                             <div class="contact-detail-header-logo" style="background:${color}" id="contact-detail-header-logo">
                                 ${initials}
@@ -72,16 +72,16 @@ function getEditContact(initals, name, email, phone, color, id) {
                     <div class="edit-contact-form flex-column">
                         
                         <div class="edit-contact-field-div">
-                            <input class="edit-contact-field" type="text" id="edit-contact-name"  value="${name}" oninput="editChangeName()" placeholder="Contact name">
-                            <img src="/asset/images/person.png" alt="">
+                            <input class="edit-contact-field" type="text" id="edit-contact-name"  value="${name}" oninput="editChangeName()" onblur="validateContactFieldOnBlur('edit-contact-name','name')" placeholder="Contact name">
+                            <img src="./asset/images/person.png" alt="">
                         </div>
                         <div class="edit-contact-field-div">
-                            <input class="edit-contact-field" type="text" id="edit-contact-email"  value="${email}"  oninput="clearErrorMsg()" placeholder="Contact email">
-                            <img src="/asset/images/grey-mail.svg" alt="">
+                            <input class="edit-contact-field" type="text" id="edit-contact-email"  value="${email}"  oninput="clearErrorMsg()" onblur="validateContactFieldOnBlur('edit-contact-email','email')" placeholder="Contact email">
+                            <img src="./asset/images/grey-mail.svg" alt="">
                         </div>
                         <div class="edit-contact-field-div">
-                            <input class="edit-contact-field" type="text" id="edit-contact-phone"  value="${phone}"  oninput="clearErrorMsg()" placeholder="Contact phone number">
-                            <img src="/asset/images/phone.svg" alt="">
+                            <input class="edit-contact-field" type="text" id="edit-contact-phone"  value="${phone}"  oninput="clearErrorMsg()" onblur="validateContactFieldOnBlur('edit-contact-phone','phone')" placeholder="Contact phone number">
+                            <img src="./asset/images/phone.svg" alt="">
                         </div>
                         <div class="edit-contact-error" id="edit-contact-error">The email is already used</div>
                     </div>
@@ -115,16 +115,16 @@ function getAddContact() {
                     <div class="edit-contact-form flex-column">
                         
                         <div class="edit-contact-field-div">
-                            <input class="edit-contact-field" type="text" id="edit-contact-name"  value="" oninput="editChangeName()"  placeholder="Contact name">
-                            <img src="/asset/images/person.png" alt="">
+                            <input class="edit-contact-field" type="text" id="edit-contact-name"  value="" oninput="editChangeName()" onblur="validateContactFieldOnBlur('edit-contact-name','name')" placeholder="Contact name">
+                            <img src="./asset/images/person.png" alt="">
                         </div>
                         <div class="edit-contact-field-div">
-                           <input class="edit-contact-field"  type="text" id="edit-contact-email"  value=""  oninput="clearErrorMsg();" placeholder="Contact email"/>
-                            <img src="/asset/images/grey-mail.svg" alt="">
+                           <input class="edit-contact-field"  type="text" id="edit-contact-email"  value=""  oninput="clearErrorMsg();" onblur="validateContactFieldOnBlur('edit-contact-email','email')" placeholder="Contact email"/>
+                            <img src="./asset/images/grey-mail.svg" alt="">
                         </div>
                         <div class="edit-contact-field-div">
-                            <input class="edit-contact-field" type="text" id="edit-contact-phone"  value=""  oninput="clearErrorMsg()" placeholder="Contact phone number">
-                            <img src="/asset/images/phone.svg" alt="">
+                            <input class="edit-contact-field" type="text" id="edit-contact-phone"  value=""  oninput="clearErrorMsg()" onblur="validateContactFieldOnBlur('edit-contact-phone','phone')" placeholder="Contact phone number">
+                            <img src="./asset/images/phone.svg" alt="">
                         </div>
                         <div class="edit-contact-error" id="edit-contact-error">The email is already used</div>
                     </div>

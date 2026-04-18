@@ -4,21 +4,21 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Log in || Join</title>
-     <link rel="icon" href="/asset/images/fav.svg" type="image/svg+xml">
-     <link rel="stylesheet" href="/styles/sidebar.css">
-     <link rel="stylesheet" href="/styles/log_in.css">
-     <link rel="stylesheet" href="/styles/standart.css">
+     <link rel="icon" href="./asset/images/fav.svg" type="image/svg+xml">
+     <link rel="stylesheet" href="./styles/sidebar.css">
+     <link rel="stylesheet" href="./styles/log_in.css">
+     <link rel="stylesheet" href="./styles/standart.css">
  </head>
  
  <body>
     <div class="animated-bigger-container">
      <div class="animated-container">
-         <img class="animated-logo" src="/asset/images/logo.svg" alt="">
+         <img class="animated-logo" src="./asset/images/logo.svg" alt="">
      </div>
     </div>
-     <div class="content">
+     <main class="content">
          <div class="content-top" >
-             <img class="logo" src="/asset/images/logo.svg" alt="">
+             <img class="logo" src="./asset/images/logo.svg" alt="">
              <div class="sign-up-container">
                  <span class="sign-up-container-text">Not a Join user?</span>
                  <div class="sign-up-container-field" onclick="window.location.href='sign-up.html'">
@@ -33,9 +33,9 @@
                 </div>
                 <div>
                 <form id="loginForm" onsubmit="login();return false" class="login-forms" action="">
-                   <input id="loginEmail" class="log-in-input-field-mail" type="text" placeholder="Email" name="uname" oninput="clearErrorMsg ()"/>
-                    <input id="loginPassword" class="log-in-input-field-password" type="password" placeholder="Password" name="uname"  oninput="clearErrorMsg ()">
-                    <div id="error-msg" class="d-none" style=" color:#ff8190">
+                   <input id="loginEmail" class="log-in-input-field-mail" type="text" placeholder="Email" name="uname" oninput="clearErrorMsg()" onblur="if(!validateLoginEmail()) errorMSG.style.visibility='visible'"/>
+                    <input id="loginPassword" class="log-in-input-field-password" type="password" placeholder="Password" name="uname" oninput="clearErrorMsg()" onblur="if(!validateLoginPassword()) errorMSG.style.visibility='visible'">
+                    <div id="error-msg" style="visibility:hidden; color:#ff8190; min-height:1.2em;">
                        The passwords are not consistent.
                    </div>
                     <div id="submitButtonsLogin" class="login-forms-submit-buttons">
@@ -48,7 +48,7 @@
          </div>
         
 
-     </div>
+     </main>
      <div class="sign-up-container-bottom">
         <span class="sign-up-container-text">Not a Join user?</span>
         <div class="sign-up-container-field" onclick="window.location.href='sign-up.html'">
@@ -61,6 +61,6 @@
     </footer>   
  </body>
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
- <script src="/js/supabase-client.js"></script>
- <script src="/js/log_in.js"></script>
- <script src="/script.js"></script>
+ <script src="./js/supabase-client.js"></script>
+ <script src="./js/log_in.js"></script>
+ <script src="./script.js"></script>

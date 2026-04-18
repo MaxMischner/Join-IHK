@@ -37,7 +37,7 @@ function validateLoginPassword() {
  */
 async function login() {
     if(!validateLoginEmail() || !validateLoginPassword()) {
-        errorMSG.classList.remove("d-none");
+        errorMSG.style.visibility = "visible";
         return false;
     }
     const { data: users, error } = await db.from('users').select('*')
@@ -62,13 +62,13 @@ function wrongLogin() {
     if (!existingWarning) return;
 
     existingWarning.innerText = 'Email or password incorrect';
-    existingWarning.classList.remove("d-none");
+    existingWarning.style.visibility = "visible";
 }
 
 
 /** Clear error message */
 function clearErrorMsg () {
-    errorMSG.classList.add("d-none");
+    errorMSG.style.visibility = "hidden";
     errorMSG.innerText = "";
 }
 

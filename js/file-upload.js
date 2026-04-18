@@ -289,16 +289,22 @@ function collectAttachments() {
  * Enter and Space activate the hidden file input, enabling keyboard-only use.
  * @param {HTMLElement} dropArea - The styled drop zone element.
  */
+function _onDropAreaKeydown(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    document.getElementById('fileInput').click();
+  }
+}
+
+function _onDropAreaClick(e) {
+  if (e.target.id !== 'fileInput') document.getElementById('fileInput').click();
+}
+
 function setupDropAreaKeyboard(dropArea) {
-  dropArea.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      document.getElementById('fileInput').click();
-    }
-  });
-  dropArea.addEventListener('click', (e) => {
-    if (e.target.id !== 'fileInput') document.getElementById('fileInput').click();
-  });
+  dropArea.removeEventListener('keydown', _onDropAreaKeydown);
+  dropArea.removeEventListener('click', _onDropAreaClick);
+  dropArea.addEventListener('keydown', _onDropAreaKeydown);
+  dropArea.addEventListener('click', _onDropAreaClick);
 }
 
 /**
@@ -310,7 +316,10 @@ function initFileUpload(existingAttachments = []) {
   attachments = existingAttachments ? [...existingAttachments] : [];
   renderPreviewList();
   const input = document.getElementById('fileInput');
-  if (input) input.addEventListener('change', handleFileInputChange);
+  if (input) {
+    input.removeEventListener('change', handleFileInputChange);
+    input.addEventListener('change', handleFileInputChange);
+  }
   const dropArea = document.getElementById('fileDropArea');
   if (dropArea) setupDropAreaKeyboard(dropArea);
 }

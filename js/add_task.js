@@ -47,7 +47,7 @@ function getPriorityLevel(button) {
 /**
  * Resets all priority buttons to their default visual state.
  */
-function buttenReset(buttons, iconMap) {
+function buttonReset(buttons, iconMap) {
   buttons.forEach((btn) => {
     btn.classList.remove("selected");
     const img = btn.querySelector("img");

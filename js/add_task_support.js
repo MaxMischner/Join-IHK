@@ -50,7 +50,7 @@ function filterContacts() {
  */
   function renderContactsInDropdown(contacts, preSelectedNames = []) {
     const container = document.getElementById("dropdownContent");
-    container.innerHTML = "";
+    if (!container) return;
 
     contacts.forEach((contact) => {
       const contactItem = createContactItem(contact.id, contact, preSelectedNames);
@@ -217,7 +217,7 @@ function getInitials(name) {
   function handleSelectionChange() {
     const checkboxes = getAllContactCheckboxes();
     const selectedContactsDiv = document.getElementById("selectedContacts");
-    selectedContactsDiv.innerHTML = "";
+    if (!selectedContactsDiv) return;
   
     const selectedNames = checkboxes
       .filter(cb => cb.checked)
@@ -281,9 +281,9 @@ function getInitials(name) {
  */
   function showError(field, errorId) {
     field.classList.add("error");
-    document.getElementById(errorId).style.display = "block";
+    document.getElementById(errorId).style.visibility = "visible";
   }
-  
+
 /**
  * Removes the error state from a form field and hides the associated error message.
  * Removes the 'error' class from the input field and sets the error message display to none.
@@ -293,7 +293,7 @@ function getInitials(name) {
  */
   function hideError(field, errorId) {
     field.classList.remove("error");
-    document.getElementById(errorId).style.display = "none";
+    document.getElementById(errorId).style.visibility = "hidden";
   }
   
   /**
@@ -344,7 +344,7 @@ function selectPriority(button) {
     },
   };
 
-  buttenReset(buttons, iconMap);
+  buttonReset(buttons, iconMap);
   button.classList.add("selected");
   const selectedLevel = getPriorityLevel(button);
   const activeImg = button.querySelector("img");

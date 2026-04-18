@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board || Join</title>
-    <link rel="icon" href="/asset/images/fav.svg" type="image/svg+xml">
+    <link rel="icon" href="./asset/images/fav.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./styles/sidebar.css">
     <link rel="stylesheet" href="./styles/standart.css">
     <link rel="stylesheet" href="./styles/summary.css">
     <link rel="stylesheet" href="./styles/board.css">
-    <link rel="stylesheet" href="/styles/add_task.css">
+    <link rel="stylesheet" href="./styles/add_task.css">
     <link rel="stylesheet" href="styles/add_task_board.css">
-    <link rel="stylesheet" href="/styles/file-upload.css">
+    <link rel="stylesheet" href="./styles/file-upload.css">
 </head>
 <body onload="init()"> 
  
@@ -40,7 +40,7 @@
         <div onclick="closeAddTaskOverlay()" id="overlayAddTask" class="overlay-box d-none"></div> 
         <div onclick="closeMoveToOverlay(event)" id="overlayMoveToMobile" class="overlay-box-move d-none"></div> 
 
-        <div class="sidebar-dummy">
+        <nav class="sidebar-dummy">
             <img class="pointer" src="./asset/images/logo-light.svg" alt="" onclick="window.location.reload()">
             <ul class="sidebar-middle">
                 <li class="pointer">
@@ -76,8 +76,8 @@
                     <a href="legal-notice.html">Legal Notice</a>
                 </li>
             </ul>
-        </div>
-        <div class="main-container">   
+        </nav>
+        <main class="main-container">
             <header class="header">
                 <img src="./asset/images/logo.svg" alt="" class="header-logo d-none" width="32" height="39">
                 <span class="header-left">Kanban Project Management Tool</span>
@@ -101,17 +101,17 @@
                 <div class="headline headline-board">
                     <div class="headline-mobile">
                         <span class="headline-left">Board</span>   
-                        <img onclick="renderAddTaskOverlay(),addTaskInit()" class="add-task-mobile-plus" src="/asset/images/plus add task mobile.png" alt="">
+                        <img onclick="renderAddTaskOverlay(),addTaskInit()" class="add-task-mobile-plus" src="./asset/images/plus add task mobile.png" alt="">
                     </div>        
                     <div class="add-task-container">
                         <div class="board-search-field-container">
                             <input id="boardSearchField" class="board-search-field" type="text" placeholder="Find Task" onkeyup="filterTasks()">
                             <div class="search-field-border"></div>
-                            <img onclick="filterTasksButton()" class="search-field-button" src="/asset/images/board-search.png" alt="">
+                            <img onclick="filterTasksButton()" class="search-field-button" src="./asset/images/board-search.png" alt="">
                         </div>                        
                         <div onclick="renderAddTaskOverlay(),addTaskInit()" class="add-task-button">
                             <div class="add-task-button-text">Add task</div>
-                            <img class="add-task-button-plus" src="/asset/images/add-task-button-plus-sign.png" alt="">
+                            <img class="add-task-button-plus" src="./asset/images/add-task-button-plus-sign.png" alt="">
                         </div>
                     </div>            
                 </div>  
@@ -120,7 +120,7 @@
                     <div ondrop="moveTo('To do')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">To Do</span>
-                            <img onclick="renderAddTaskOverlay('To do'),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay('To do'),addTaskInit()" class="board-splits-image" src="./asset/images/plus button mobile-white.svg" alt="">
                         </div>
                         <div class="board-splits-content" id="ToDo"></div>
                         <div class="no-tasks" id="noTasksToDo">
@@ -132,7 +132,7 @@
                     <div ondrop="moveTo('in Progress')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">In Progress</span>
-                            <img onclick="renderAddTaskOverlay('in Progress'),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay('in Progress'),addTaskInit()" class="board-splits-image" src="./asset/images/plus button mobile-white.svg" alt="">
                         </div>
 
                         <div class="board-splits-content" id="inProgress"></div>
@@ -145,7 +145,7 @@
                     <div ondrop="moveTo('await Feedback')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">Await feedback</span>
-                            <img onclick="renderAddTaskOverlay('await Feedback'),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay('await Feedback'),addTaskInit()" class="board-splits-image" src="./asset/images/plus button mobile-white.svg" alt="">
                         </div>
 
                         <div class="board-splits-content" id="await"></div>
@@ -158,7 +158,7 @@
                     <div ondrop="moveTo('done')" ondragover="allowDrop(event)" class="board-splits">
                         <div class="board-splits-category">
                             <span class="board-splits-text">Done</span>
-                            <img onclick="renderAddTaskOverlay(),addTaskInit()" class="board-splits-image" src="/asset/images/plus button mobile-white.svg" alt="">
+                            <img onclick="renderAddTaskOverlay(),addTaskInit()" class="board-splits-image" src="./asset/images/plus button mobile-white.svg" alt="">
                         </div>
                         <div class="board-splits-content" id="done"></div>
                         <div class="no-tasks" id="noTasksDone">
@@ -167,27 +167,27 @@
                         <div id="emptyDragBox1" class="empty-drag-box d-none"></div>
                     </div>   
 
-                </div>             
-            </div> 
-        
-        </div>
+                </div>
+            </div>
+
+        </main>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/js/supabase-client.js"></script>
-<script src="/js/file-upload.js"></script>
-<script src="/js/image-viewer.js"></script>
-<script src="/asset/templats/board_tasks-template.js"></script>
-<script src="/js/add_task.js"></script>
+<script src="./js/supabase-client.js"></script>
+<script src="./js/file-upload.js"></script>
+<script src="./js/image-viewer.js"></script>
+<script src="./asset/templats/board_tasks-template.js"></script>
+<script src="./js/add_task.js"></script>
 <script src="js/add_task_support.js"></script>
 <script src="js/add_task_event&restrict.js"></script>
-<script src="/js/log_in.js"></script>
-<script src="/script.js"></script>
+<script src="./js/log_in.js"></script>
+<script src="./script.js"></script>
 <script src="js/script-loggedin.js"></script>
-<script src="/js/summary.js"></script>
-<script src="/js/users.js"></script>
-<script src="/js/moment.js"></script>
-<script src="/js/board.js"></script>
-<script src="/js/board-overlay.js"></script>
+<script src="./js/summary.js"></script>
+<script src="./js/users.js"></script>
+<script src="./js/moment.js"></script>
+<script src="./js/board.js"></script>
+<script src="./js/board-overlay.js"></script>
 
 </html>
