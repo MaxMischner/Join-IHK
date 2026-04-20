@@ -52,6 +52,8 @@ function filterContacts() {
     const container = document.getElementById("dropdownContent");
     if (!container) return;
 
+    container.innerHTML = "";
+
     contacts.forEach((contact) => {
       const contactItem = createContactItem(contact.id, contact, preSelectedNames);
       container.appendChild(contactItem);
@@ -215,29 +217,38 @@ function getInitials(name) {
  * @global {string} assigned - Comma-separated list of selected contact names.
  */
   function handleSelectionChange() {
+    const MAX_VISIBLE = 5;
     const checkboxes = getAllContactCheckboxes();
     const selectedContactsDiv = document.getElementById("selectedContacts");
     if (!selectedContactsDiv) return;
-  
-    const selectedNames = checkboxes
-      .filter(cb => cb.checked)
-      .map(cb => {
-        const name = cb.dataset.name;
-        const contactItem = cb.closest(".contact-item");
-        contactItem.classList.add("selected");
-  
+
+    selectedContactsDiv.innerHTML = "";
+
+    const selected = checkboxes.filter(cb => cb.checked);
+
+    selected.forEach((cb, i) => {
+      const contactItem = cb.closest(".contact-item");
+      contactItem.classList.add("selected");
+
+      if (i < MAX_VISIBLE) {
         const contactInitial = contactItem.querySelector(".contact-initial");
         const bgColor = window.getComputedStyle(contactInitial).backgroundColor;
-  
-        addContactChip(name, selectedContactsDiv, bgColor);
-        return name;
-      });
-  
+        addContactChip(cb.dataset.name, selectedContactsDiv, bgColor);
+      }
+    });
+
+    if (selected.length > MAX_VISIBLE) {
+      const more = document.createElement("div");
+      more.className = "selected-contact-chip selected-contact-chip-more";
+      more.textContent = `+${selected.length - MAX_VISIBLE}`;
+      selectedContactsDiv.appendChild(more);
+    }
+
     checkboxes
       .filter(cb => !cb.checked)
       .forEach(cb => cb.closest(".contact-item").classList.remove("selected"));
-  
-    assigned = selectedNames.join(", ");
+
+    assigned = selected.map(cb => cb.dataset.name).join(", ");
   }
   
     

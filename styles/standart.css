@@ -58,6 +58,14 @@ a:visited {
     cursor: pointer;
 }
 
+.pointer {
+    display: block;
+}
+
+.overlay-content ul li {
+    cursor: pointer;
+}
+
 .d-none {
     display:none;
 }

@@ -367,6 +367,11 @@ cursor: pointer;
   justify-content: center;
 }
 
+.selected-contact-chip-more {
+  background-color: #2a3647;
+  font-size: 12px;
+}
+
 select {
   width: 100%;
   max-width: 440px;

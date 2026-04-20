@@ -109,10 +109,10 @@ function buildSubtaskItem(value) {
 function createSubtaskItemActions(item) {
   const wrap = document.createElement('div');
   wrap.className = 'subtask-item-actions';
-  const editBtn = createIconButton('/asset/images/edit.svg', 'Edit',
+  const editBtn = createIconButton('./asset/images/edit.svg', 'Edit',
     (e) => { e.stopPropagation(); editSubtask(item, item.dataset.name); });
   editBtn.className = 'subtask-action-icon';
-  const del = createIconButton('/asset/img/icons/delete.png', 'Delete',
+  const del = createIconButton('./asset/img/icons/delete.png', 'Delete',
     (e) => { e.stopPropagation(); item.remove(); });
   del.className = 'subtask-action-icon';
   wrap.append(editBtn, createDivider(), del);
@@ -152,6 +152,15 @@ function editSubtask(item, oldValue) {
   wrapper.append(input, delBtn, divider, saveBtn);
   replaceSubtaskContent(item, wrapper);
   input.focus();
+
+  input.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (!input.isConnected) return;
+      const newValue = input.value.trim();
+      if (!newValue) { item.remove(); return; }
+      item.replaceWith(buildSubtaskItem(newValue));
+    }, 100);
+  });
 }
 
 /**
@@ -168,7 +177,7 @@ function createSubtaskInput(value) {
  * Creates a delete icon button for a subtask.
  */
 function createDeleteButton(item) {
-  return createIconButton("asset/img/icons/delete.png", "Delete", () => {
+  return createIconButton("./asset/img/icons/delete.png", "Delete", () => {
     item.remove();
   });
 }
@@ -177,7 +186,7 @@ function createDeleteButton(item) {
  * Creates a save icon button for confirming subtask edits.
  */
 function createSaveButton(item, input) {
-  return createIconButton("asset/img/icons/Subtasks icons11.png", "Save", () => {
+  return createIconButton("./asset/img/icons/Subtasks icons11.png", "Save", () => {
     const newValue = input.value.trim();
     if (!newValue) return item.remove();
     const newItem = createNewSubtaskItem(newValue);

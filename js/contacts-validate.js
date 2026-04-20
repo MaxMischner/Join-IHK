@@ -4,9 +4,15 @@ function validateEmail(value) {
         return [false, "The email address cannot be empty"];
     }
 
-    let patt = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        
+    let patt = /^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
+
     if(!patt.test(value.trim())) {
+        return [false, "Please fill a valid email address."];
+    }
+
+    const domain = value.trim().split('@')[1];
+    const domainWithoutTLD = domain.substring(0, domain.lastIndexOf('.'));
+    if (!/[a-zA-Z]/.test(domainWithoutTLD)) {
         return [false, "Please fill a valid email address."];
     }
 
@@ -32,7 +38,7 @@ function validatePhone(value) {
         return [false, "The phone nummber cannot be empty"];
     }
 
-    const patt = /^\+?\d+$/;
+    const patt = /^\+?[\d\s\-()/]{6,25}$/;
         
     if(!patt.test(value.trim())) {
         return [false, "Please fill a valid phone number."];

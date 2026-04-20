@@ -231,7 +231,7 @@ function attachDragScroll(c) {
     const s = { isDown: false, startX: 0, scrollLeft: 0, hasDragged: false };
     c.style.userSelect = 'none';
     c.addEventListener('mousedown', (e) => onScrollDown(e, c, s));
-    c.addEventListener('dragstart', (e) => { if (s.isDown) e.preventDefault(); });
+    c.addEventListener('dragstart', (e) => { if (s.isDown && !e.target.closest('.tasks-content')) e.preventDefault(); });
     document.addEventListener('mousemove', (e) => onScrollMove(e, c, s));
     document.addEventListener('mouseup', () => onScrollUp(c, s));
     c.addEventListener('click', (e) => onScrollClick(e, s), true);

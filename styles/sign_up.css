@@ -1,4 +1,8 @@
 
+#signupCB {
+    cursor: pointer;
+}
+
 .widescreen {
     max-width: 1920px;
     margin: auto;
