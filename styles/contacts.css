@@ -1,8 +1,3 @@
-.widescreen {
-    max-width: 1920px;
-    margin: auto;
-}
-
 .contact-overlay {
     overflow: hidden;
     position: absolute;
@@ -184,8 +179,7 @@
 
 .contact-detail-delete {
     background-image: url(../asset/images/delete.svg);
-    width: 130px !important;
-    background-position: 7% center !important;
+    background-position: 7% center;
 }
 
 .contact-detail-delete:hover {
@@ -318,7 +312,7 @@
     }   
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
     .contact-left {
         width: 100%;
         height: calc(100vh - 100px);

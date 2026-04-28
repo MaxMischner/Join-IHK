@@ -5,11 +5,14 @@ let currentDraggedElement;
 let currentButton;
 
 
+/**
+ * Initializes the board page: checks login, loads tasks and contacts, renders all columns.
+ */
 async function init() {
     let user = localStorage.getItem("activeUser");
     let guestUser = localStorage.getItem("guestUser");
     if (!user && !guestUser) {
-        window.location.href = "log_in.html";
+        window.location.href = "index.html";
         return;
     }
     let activeUser = JSON.parse(localStorage.getItem("activeUser"));
@@ -89,9 +92,13 @@ function showNoTasksContainer() {
     document.getElementById('noTasksDone').classList.remove('d-none');
 }
 
+/**
+ * Renders a task into the "To do" column if its status matches.
+ * @param {number} index - Index of the task in allTasks.
+ */
 function renderTodo(index) {
     let ToDo = document.getElementById('ToDo');
-    let subtasksClass = (!allTasks[index].subtasks) ? 'd-none' : '';
+    let subtasksClass = (!allTasks[index].subtasks || allTasks[index].subtasks.length === 0) ? 'd-none' : '';
     let names = allTasks[index].assigned.split(',');
     if (allTasks[index].status === "To do") {
         ToDo.innerHTML += showToDoTasks(index, subtasksClass, names);
@@ -99,9 +106,13 @@ function renderTodo(index) {
     }
 }
 
+/**
+ * Renders a task into the "In Progress" column if its status matches.
+ * @param {number} index - Index of the task in allTasks.
+ */
 function renderProgress(index) {
     let inProgress = document.getElementById('inProgress');
-    let subtasksClass = (!allTasks[index].subtasks) ? 'd-none' : '';
+    let subtasksClass = (!allTasks[index].subtasks || allTasks[index].subtasks.length === 0) ? 'd-none' : '';
     let names = allTasks[index].assigned.split(',');
     if (allTasks[index].status === "in Progress") {
         inProgress.innerHTML += showInProgressTasks(index, subtasksClass, names);
@@ -109,9 +120,13 @@ function renderProgress(index) {
     }
 }
 
+/**
+ * Renders a task into the "Await Feedback" column if its status matches.
+ * @param {number} index - Index of the task in allTasks.
+ */
 function renderAwaitFeedback(index) {
     let awaitEl = document.getElementById('await');
-    let subtasksClass = (!allTasks[index].subtasks) ? 'd-none' : '';
+    let subtasksClass = (!allTasks[index].subtasks || allTasks[index].subtasks.length === 0) ? 'd-none' : '';
     let names = allTasks[index].assigned.split(',');
     if (allTasks[index].status === "await Feedback") {
         awaitEl.innerHTML += showAwaitFeedbackTasks(index, subtasksClass, names);
@@ -119,9 +134,13 @@ function renderAwaitFeedback(index) {
     }
 }
 
+/**
+ * Renders a task into the "Done" column if its status matches.
+ * @param {number} index - Index of the task in allTasks.
+ */
 function renderDone(index) {
     let done = document.getElementById('done');
-    let subtasksClass = (!allTasks[index].subtasks) ? 'd-none' : '';
+    let subtasksClass = (!allTasks[index].subtasks || allTasks[index].subtasks.length === 0) ? 'd-none' : '';
     let names = allTasks[index].assigned.split(',');
     if (allTasks[index].status === "done") {
         done.innerHTML += showDoneTasks(index, subtasksClass, names);
@@ -148,6 +167,10 @@ function subTaskLength(index) {
     return "";
 }
 
+/**
+ * Stops event propagation to prevent the task detail overlay from opening.
+ * @param {Event} event
+ */
 function noBubbling(event) {
     event.stopPropagation();
 }
@@ -160,6 +183,10 @@ function getInitials(names) {
     return initials;
 }
 
+/**
+ * Sets the currently dragged task index and applies a tilt animation.
+ * @param {number} index - Index of the task being dragged.
+ */
 function startDragging(index) {
     if (window.innerWidth <= 1330) return;
     currentDraggedElement = index;
@@ -167,6 +194,10 @@ function startDragging(index) {
     document.body.classList.add('drag-active');
 }
 
+/**
+ * Allows a dragged element to be dropped by preventing the default browser behaviour.
+ * @param {DragEvent} ev
+ */
 function allowDrop(ev) {
     if (window.innerWidth <= 1330) return;
     ev.preventDefault();

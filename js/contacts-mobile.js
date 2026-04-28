@@ -35,7 +35,7 @@ function goContactList() {
 addEventListener("resize", (event) => {});
 onresize = (event) => {
     showSidebarBottom();
-    if (window.innerWidth <= 1100) {
+    if (window.innerWidth <= 1024) {
         isMobile = true;
         if (!isOpenContactDetail) contactRightDiv.classList.add("d-none");
         else {

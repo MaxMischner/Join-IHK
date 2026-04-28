@@ -83,60 +83,7 @@
     color: #fff;
 }
 
-@media (max-width: 780px) {
-    .sidebar-dummy .sidebar-bottom {
-        display: flex;
-    }
-
-    .sidebar-dummy > img {
-        display: none;
-    }
-
-    .sidebar-dummy .sidebar-middle.log-in-ul {
-        width: 25%;
-        position: static;
-        flex-grow: 0;
-    }
-
-    .sidebar-dummy .sidebar-middle.log-in-ul li {
-        width: 100%;
-    
-    }
-
-    .sidebar-dummy .sidebar-middle {
-        margin-top: 0;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-
-        display: flex;
-    }
-
-    .sidebar-dummy .sidebar-middle li {
-        height: 80px;
-        width: 25%;
-        margin-top: 0;
-        padding: 0;
-        
-
-        
-    }
-
-    .sidebar-dummy .sidebar-middle li a{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-left: 0;
-        width: 100%;
-        height: 80px;
-        padding-left: 0px;
-    }
-
-    .sidebar-dummy .sidebar-middle img {
-        margin-right: 0;
-    }
-
+@media (max-width: 1024px) {
     .sidebar-dummy {
         position: fixed;
         left: 0;
@@ -145,9 +92,45 @@
         width: 100% !important;
         flex-direction: row;
         justify-content: space-between;
+        z-index: 100;
+    }
+
+    .sidebar-dummy > img {
+        display: none;
+    }
+
+    .sidebar-dummy .sidebar-middle {
+        margin-top: 0;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+    }
+
+    .sidebar-dummy .sidebar-middle li {
+        height: 80px;
+        width: 25%;
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .sidebar-dummy .sidebar-middle li a {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        width: 100%;
+        height: 80px;
+        padding-left: 0;
+    }
+
+    .sidebar-dummy .sidebar-middle img {
+        margin-right: 0;
     }
 
     .sidebar-dummy .sidebar-bottom {
+        display: flex;
         height: 80px;
         margin-bottom: 0;
         width: auto;
@@ -157,15 +140,22 @@
         height: 80px;
         padding: 0 8px;
         border-radius: 15px;
-
         float: left;
     }
 
-    .sidebar-dummy .sidebar-bottom li a{
+    .sidebar-dummy .sidebar-bottom li a {
         line-height: 80px;
-        height: 80px;
-        
+    }
+}
+
+@media (max-width: 780px) {
+    .sidebar-dummy .sidebar-middle.log-in-ul {
+        width: 25%;
+        position: static;
+        flex-grow: 0;
     }
 
-
+    .sidebar-dummy .sidebar-middle.log-in-ul li {
+        width: 100%;
+    }
 }

@@ -145,6 +145,8 @@
 .task-detail-attachments {
   margin-top: 16px;
   margin-bottom: 8px;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .task-detail-attachments-title {

@@ -228,7 +228,7 @@ function renderDeadline(tasksArray) {
             }
         }
     }
-    let deadline = moment(upcomingDeadline).format('ll');
+    let deadline = new Date(upcomingDeadline).toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
     document.getElementById('deadline').innerHTML = deadline;
 }
 

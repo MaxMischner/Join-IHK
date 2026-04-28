@@ -9,7 +9,6 @@
 body {
     font-family: 'Inter';
     background-color: rgba(246, 247, 248, 1);
-    overflow-x: hidden;
 }
 
 .drag-active .empty-drag-box {

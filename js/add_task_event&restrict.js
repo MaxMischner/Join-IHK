@@ -40,7 +40,8 @@ document.addEventListener("click", function (event) {
   
     const minDate = getTodayAsMinDate();
     dateInput.setAttribute("min", minDate);
-  
+    dateInput.addEventListener("invalid", (e) => e.preventDefault());
+
     setupDueDateValidation(dateInput);
   }
   
@@ -129,7 +130,7 @@ document.addEventListener("click", function (event) {
     const guestUser = localStorage.getItem("guestUser");
   
     if (!user && !guestUser) {
-      window.location.href = "log_in.html";
+      window.location.href = "index.html";
       return false;
     }
     return true;
@@ -220,6 +221,18 @@ function validateTaskBeforeSave() {
       if (!el.value.trim()) { showError(el, errorId); isValid = false; }
       else hideError(el, errorId);
     });
+    const dateEl = document.getElementById("date-task");
+    const dateErrorEl = document.getElementById("errorMsg-date");
+    if (dateEl.value) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const selected = new Date(dateEl.value);
+      if (selected < today) {
+        showError(dateEl, "errorMsg-date");
+        dateErrorEl.textContent = "Due date cannot be in the past.";
+        isValid = false;
+      }
+    }
     return isValid;
   }
   

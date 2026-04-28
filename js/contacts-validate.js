@@ -24,9 +24,13 @@ function validateUsername(value) {
     if (!value.trim())  {
         return [false, "The name cannot be empty"];
     }
-        
+
     if(value.trim().length < 3) {
         return [false, "The name requires at least 3 letters."];
+    }
+
+    if (!/[a-zA-ZäöüÄÖÜß]/.test(value.trim())) {
+        return [false, "The name must contain at least one letter."];
     }
 
     return [true, ""];

@@ -19,7 +19,7 @@ let deleteInProgress = false;
 /** Check if it is on mobile */
 function initUI() {
     getUser();
-    if (window.innerWidth <= 1100) {
+    if (window.innerWidth <= 1024) {
         isMobile = true;
         contactRightDiv.classList.add("d-none");
         contactLeftDiv.classList.remove("d-none");

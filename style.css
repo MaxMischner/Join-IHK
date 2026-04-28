@@ -250,6 +250,12 @@
     }
 }
 
+@media (max-width: 1024px) {
+    .main-container {
+        padding-bottom: 80px;
+    }
+}
+
 /* Mobile Style*/
 @media (max-width: 780px) {
     .main-container {

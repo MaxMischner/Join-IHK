@@ -28,6 +28,10 @@ async function putTask(data, id = "") {
     }
 }
 
+/**
+ * Deletes a task from the database by its ID.
+ * @param {string} id - The Supabase row ID of the task to delete.
+ */
 async function deleteTask(id) {
     const { error } = await db.from('tasks').delete().eq('id', id);
     if (error) console.error(error);

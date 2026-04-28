@@ -76,8 +76,8 @@ function parseSubtasks(index) {
  * Converts due date format for the task detail view.
  */
 function taskDetailDueDate(date) {
-    let dueDate = moment(date).format('L');
-    return dueDate;
+    const d = new Date(date);
+    return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
 /**
@@ -221,12 +221,31 @@ function renderEditTaskOverlay(index) {
         });
     }
     initFileUpload(task.attachments || []);
+    const dateInput = document.getElementById("date-task");
+    if (dateInput) {
+        const today = new Date();
+        const minDate = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+        dateInput.setAttribute("min", minDate);
+        dateInput.addEventListener("invalid", (e) => e.preventDefault());
+    }
 }
 
 /**
  * Saves the edited task to Supabase and refreshes the UI.
  */
 async function saveEditedTask(index) {
+    const dateInput = document.getElementById("date-task");
+    const dateErrorEl = document.getElementById("errorMsg-date");
+    if (dateInput && dateInput.value) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const selected = new Date(dateInput.value);
+        if (selected < today) {
+            dateInput.classList.add("error");
+            if (dateErrorEl) { dateErrorEl.textContent = "Due date cannot be in the past."; dateErrorEl.style.visibility = "visible"; }
+            return;
+        }
+    }
     collectTaskData();
     const task = allTasks[index];
     const taskId = task.id;
